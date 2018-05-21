@@ -32,7 +32,7 @@
 
             <!--customer tab-->
             <TextView
-                android:id="@+id/btn_main_home"
+                android:id="@+id/tab_customer_home"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -41,7 +41,7 @@
                 />
 
             <TextView
-                android:id="@+id/btn_main_search"
+                android:id="@+id/tab_customer_surplus"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -50,7 +50,7 @@
                 />
 
             <TextView
-                android:id="@+id/btn_main_add"
+                android:id="@+id/tab_customer_payment"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -59,7 +59,7 @@
                 />
 
             <TextView
-                android:id="@+id/btn_main_news"
+                android:id="@+id/tab_customer_setting"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
