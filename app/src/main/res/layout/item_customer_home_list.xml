@@ -7,7 +7,7 @@
     >
 
     <ImageView
-        android:id="@+id/customer_home_list_product_img"
+        android:id="@+id/customer_home_product_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
@@ -35,7 +35,7 @@
         >
 
         <TextView
-            android:id="@+id/customer_home_list_product_company"
+            android:id="@+id/customer_home_product_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Company Name"
@@ -70,7 +70,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/customer_home_list_surplus_tv"
+            android:id="@+id/customer_home_product_surplus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="재고"
@@ -79,6 +79,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/customer_home_product_like"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginBottom="8dp"
