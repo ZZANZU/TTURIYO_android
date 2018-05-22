@@ -47,7 +47,7 @@ class CustomerHomeFragment : Fragment() {
                 }
                 1 -> {
                     CustomerHomeSearchFragment.newInstance(1)
-                    return CustomerHomeListFragment()
+                    return CustomerHomeSearchFragment()
                 }
             }
             return CustomerHomeListFragment()
