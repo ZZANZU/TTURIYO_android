@@ -11,23 +11,31 @@
     >
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/customer_home_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <Toolbar
+            android:id="@+id/customer_home_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             >
 
-        </android.support.v7.widget.Toolbar>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="떠리요"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_vertical"
+                />
+
+        </Toolbar>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/customer_home_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -35,7 +43,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+        android:id="@+id/customer_home_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
