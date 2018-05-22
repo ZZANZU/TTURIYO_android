@@ -9,72 +9,56 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.tturiyo.tturiyo_android.R
 import kotlinx.android.synthetic.main.fragment_customer_home.*
+import kotlinx.android.synthetic.main.fragment_customer_home.view.*
 
 /**
  * Created by user on 2018-05-22.
  */
 class CustomerHomeFragment : Fragment() {
+    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val mView = inflater.inflate(R.layout.fragment_customer_home, container, false)
+//        fragmentManager
+//        activity?.fragmentManager
 
-        configureTabLayout(customer_home_tablayout!!)
+        (activity as AppCompatActivity).setSupportActionBar(customer_home_toolbar)
+        mSectionsPagerAdapter = SectionsPagerAdapter((activity as AppCompatActivity).supportFragmentManager)
+
+        mView.customer_home_viewpager.adapter = mSectionsPagerAdapter
+
+        mView.customer_home_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mView.customer_home_tablayout))
+//        mView.customer_home_tablayout.removeOnTabSelectedListener(TabLayout.OnTabSelectedListener)
+
+        mView.customer_home_tablayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mView.customer_home_viewpager))
 
         return mView
     }
 
-    private fun configureTabLayout(tabLayout: TabLayout) {
-        tabLayout.addTab(tabLayout.newTab().setText("실시간 목록"))
-        tabLayout.addTab(tabLayout.newTab().setText("찾아보기"))
-
-        val adapter = TabPagerAdapter(activity!!.supportFragmentManager, tabLayout.tabCount) // !! : 흠
-
-        customer_home_viewpager.adapter = adapter
-        customer_home_viewpager.addOnPageChangeListener(
-                TabLayout.TabLayoutOnPageChangeListener(customer_home_tablayout))
-
-        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                customer_home_viewpager.currentItem = tab.position
+    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+        override fun getItem(position: Int): Fragment {
+            when(position) {
+                0 -> {
+                    CustomerHomeListFragment.newInstance(0)
+                    return CustomerHomeListFragment()
+                }
+                1 -> {
+                    CustomerHomeSearchFragment.newInstance(1)
+                    return CustomerHomeListFragment()
+                }
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-        })
-    }
-
-    companion object {
-        val PAGE_NUM = "PAGE_NUM"
-        fun newInstance(page: Int): CustomerHomeFragment {
-            val fragment = CustomerHomeFragment()
-            val args = Bundle()
-            args.putInt(PAGE_NUM, page)
-            fragment.setArguments(args)
-            return fragment
+            return CustomerHomeListFragment()
         }
-    }
-}
 
-class TabPagerAdapter(fm: FragmentManager, private var tabCount: Int) : FragmentPagerAdapter(fm) {
-    override fun getItem(position: Int): Fragment? {
-        when(position) {
-            0 -> return CustomerHomeListFragment()
-            1 -> return CustomerHomeSearchFragment()
-
-            else -> return null
+        override fun getCount(): Int {
+            return 2
         }
-    }
 
-    override fun getCount(): Int {
-        return tabCount
     }
 }

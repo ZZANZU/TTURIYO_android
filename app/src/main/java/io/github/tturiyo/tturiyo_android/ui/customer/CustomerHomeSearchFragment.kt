@@ -16,4 +16,24 @@ class CustomerHomeSearchFragment: Fragment() {
 
         return mView
     }
+
+    companion object {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private val ARG_SECTION_NUMBER = "section_number"
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        fun newInstance(sectionNumber: Int): CustomerHomeSearchFragment {
+            val fragment = CustomerHomeSearchFragment()
+            val args = Bundle()
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }
