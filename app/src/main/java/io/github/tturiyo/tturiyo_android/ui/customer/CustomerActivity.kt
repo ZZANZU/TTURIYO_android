@@ -28,7 +28,7 @@ class CustomerActivity : AppCompatActivity(), View.OnClickListener {
         val mTransaction = mFragmentManager.beginTransaction()
 
         mTransaction.add(R.id.customer_fragment, mFragment)
-        mTransaction.addToBackStack(null)
+//        mTransaction.addToBackStack(null)
         mTransaction.commit()
     }
 
