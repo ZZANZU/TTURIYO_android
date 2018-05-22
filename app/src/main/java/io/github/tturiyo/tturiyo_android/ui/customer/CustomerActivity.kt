@@ -6,10 +6,6 @@ import android.support.v4.app.Fragment
 import android.view.View
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.R
-import io.github.tturiyo.tturiyo_android.ui.CustomerHomeFragment
-import io.github.tturiyo.tturiyo_android.ui.CustomerPaymentFragment
-import io.github.tturiyo.tturiyo_android.ui.CustomerSettingFragment
-import io.github.tturiyo.tturiyo_android.ui.CustomerSurplusFragment
 import kotlinx.android.synthetic.main.activity_customer.*
 
 class CustomerActivity : AppCompatActivity(), View.OnClickListener {
