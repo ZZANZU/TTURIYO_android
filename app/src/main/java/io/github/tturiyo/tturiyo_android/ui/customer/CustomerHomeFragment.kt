@@ -25,8 +25,6 @@ class CustomerHomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val mView = inflater.inflate(R.layout.fragment_customer_home, container, false)
-//        fragmentManager
-//        activity?.fragmentManager
 
         (activity as AppCompatActivity).setSupportActionBar(customer_home_toolbar)
         mSectionsPagerAdapter = SectionsPagerAdapter((activity as AppCompatActivity).supportFragmentManager)
@@ -34,7 +32,6 @@ class CustomerHomeFragment : Fragment() {
         mView.customer_home_viewpager.adapter = mSectionsPagerAdapter
 
         mView.customer_home_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mView.customer_home_tablayout))
-//        mView.customer_home_tablayout.removeOnTabSelectedListener(TabLayout.OnTabSelectedListener)
 
         mView.customer_home_tablayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mView.customer_home_viewpager))
 
