@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.tturiyo.tturiyo_android.R
+import io.github.tturiyo.tturiyo_android.data.CustomerHomeProduct
 import kotlinx.android.synthetic.main.fragment_customer_home_list.*
 import kotlinx.android.synthetic.main.fragment_customer_home_list.view.*
 
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_customer_home_list.view.*
  * Created by user on 2018-05-22.
  */
 class CustomerHomeListFragment: Fragment() {
-    lateinit var mProductItems : ArrayList<CustomerHomeProductData>
+    lateinit var mProductItems : ArrayList<CustomerHomeProduct>
     lateinit var mCustomerHomeProductAdapter : CustomerHomeProductAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -22,13 +23,13 @@ class CustomerHomeListFragment: Fragment() {
 
         mProductItems = ArrayList()
 
-        mProductItems.add(CustomerHomeProductData(R.drawable.company_img, "떡뽀이"
+        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
                 , "4000", "3000", "10개/23개", R.drawable.like_off_img))
-        mProductItems.add(CustomerHomeProductData(R.drawable.company_img, "떡뽀이"
+        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
                 , "4000", "3000", "10개/23개", R.drawable.like_off_img))
-        mProductItems.add(CustomerHomeProductData(R.drawable.company_img, "떡뽀이"
+        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
                 , "4000", "3000", "10개/23개", R.drawable.like_off_img))
-        mProductItems.add(CustomerHomeProductData(R.drawable.company_img, "떡뽀이"
+        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
                 , "4000", "3000", "10개/23개", R.drawable.like_off_img))
 
 

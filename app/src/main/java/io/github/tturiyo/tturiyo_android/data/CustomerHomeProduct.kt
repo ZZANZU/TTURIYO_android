@@ -1,4 +1,4 @@
-package io.github.tturiyo.tturiyo_android.ui.customer
+package io.github.tturiyo.tturiyo_android.data
 
 /**
  * Created by user on 2018-05-22.
@@ -9,7 +9,7 @@ package io.github.tturiyo.tturiyo_android.ui.customer
  * productSurplus - 상품 재고
  * productLike - 상품 like 여부
  */
-data class CustomerHomeProductData (
+data class CustomerHomeProduct (
         var companyImage : Int,
         var companyName : String,
         var productPriceBefore : String,
