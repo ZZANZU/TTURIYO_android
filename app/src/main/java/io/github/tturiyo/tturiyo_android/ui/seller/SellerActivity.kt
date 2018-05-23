@@ -11,7 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_seller.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-
+import io.github.tturiyo.tturiyo_android.data.file.getUuid
 
 
 class SellerActivity : AppCompatActivity() {
@@ -69,7 +69,12 @@ class SellerActivity : AppCompatActivity() {
         Log.d()
 
         val productsRef = FirebaseDatabase.getInstance().getReference("products")
-        productsRef.push().setValue(ProductData.data)
+        ProductData.data.uid = getUuid()
+        val push: DatabaseReference = productsRef.push()
+        productsRef.child(push.key).setValue(ProductData.data)
+
+        val userRef = FirebaseDatabase.getInstance().getReference("users")
+        userRef.child(getUuid()).child("products").push().setValue(push.key)
     }
 
     override fun onDestroy() {
