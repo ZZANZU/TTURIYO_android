@@ -1,9 +1,7 @@
 package io.github.tturiyo.tturiyo_android.ui.seller
 
+import io.github.tturiyo.tturiyo_android.data.Product
+
 object ProductData {
-    var companyname: String = ""
-    var companylocation: String = ""
-    var productname: String = ""
-    var productpriceafter: String = ""
-    var productdue: String = ""
+    val data: Product = Product()
 }

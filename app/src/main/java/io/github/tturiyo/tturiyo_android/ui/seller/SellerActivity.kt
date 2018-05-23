@@ -9,6 +9,10 @@ import io.github.tturiyo.tturiyo_android.R
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_seller.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
+
 
 class SellerActivity : AppCompatActivity() {
     val disposables = CompositeDisposable()
@@ -29,27 +33,27 @@ class SellerActivity : AppCompatActivity() {
                         .map { it.editable().toString() }
                         .extLogd()
                         .subscribe {
-                            ProductData.companyname = it
+                            ProductData.data.companyname = it
                         },
                 RxTextView.afterTextChangeEvents(et_companylocation)
                         .map { it.editable().toString() }
                         .subscribe {
-                            ProductData.companylocation = it
+                            ProductData.data.companylocation = it
                         },
                 RxTextView.afterTextChangeEvents(et_productname)
                         .map { it.editable().toString() }
                         .subscribe {
-                            ProductData.productname = it
+                            ProductData.data.productname = it
                         },
                 RxTextView.afterTextChangeEvents(et_productpriceafter)
                         .map { it.editable().toString() }
                         .subscribe {
-                            ProductData.productpriceafter = it
+                            ProductData.data.productpriceafter = it
                         },
                 RxTextView.afterTextChangeEvents(et_productdue)
                         .map { it.editable().toString() }
                         .subscribe {
-                            ProductData.productdue = it
+                            ProductData.data.productdue = it
                         }
                 )
 
@@ -63,6 +67,9 @@ class SellerActivity : AppCompatActivity() {
 
     private fun saveData() {
         Log.d()
+
+        val productsRef = FirebaseDatabase.getInstance().getReference("products")
+        productsRef.push().setValue(ProductData.data)
     }
 
     override fun onDestroy() {
