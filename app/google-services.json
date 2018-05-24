@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "170462471936",
+    "firebase_url": "https://tturiyo.firebaseio.com",
+    "project_id": "tturiyo",
+    "storage_bucket": "tturiyo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170462471936:android:934afd44f7a92e1e",
+        "android_client_info": {
+          "package_name": "io.github.tturiyo.tturiyo_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170462471936-fn29mcdumm3pepf3g6v4ikquh5bup16q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC8_wnJjZZvET8TNw-7siQmEDurAr9PUE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
