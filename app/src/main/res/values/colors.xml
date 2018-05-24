@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#c32a37</color>
     <color name="colorAccent">#c32a37</color>
     <color name="customerTabColor">#9b1f2a</color>
+    <color name="white">#ffffff</color>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TTURIYO_android</string>
+    <string name="app_name">떠리요</string>
     <string name="customer_tab_home">홈</string>
     <string name="customer_tab_surplus">단골떠리</string>
     <string name="customer_tab_payment">결제하기</string>
