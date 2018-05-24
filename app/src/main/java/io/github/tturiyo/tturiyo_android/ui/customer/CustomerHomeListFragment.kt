@@ -24,13 +24,13 @@ class CustomerHomeListFragment: Fragment() {
         mProductItems = ArrayList()
 
         mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "4000", "3000", "10개/23개", R.drawable.like_off_img))
+                , "돈가스 떡볶이", "4000", "3000", "10개/23개", R.drawable.like_off_img))
         mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "4000", "3000", "10개/23개", R.drawable.like_off_img))
+                , "떡볶이","4000", "3000", "10개/23개", R.drawable.like_off_img))
         mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "4000", "3000", "10개/23개", R.drawable.like_off_img))
+                , "돈가스", "4000", "3000", "10개/23개", R.drawable.like_off_img))
         mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "4000", "3000", "10개/23개", R.drawable.like_off_img))
+                , "순대", "4000", "3000", "10개/23개", R.drawable.like_off_img))
 
 
         mCustomerHomeProductAdapter = CustomerHomeProductAdapter(mProductItems)

@@ -15,6 +15,7 @@ class CustomerHomeProductAdapter(private var productItems : ArrayList<CustomerHo
     override fun onBindViewHolder(holder: CustomerHomeProductViewHolder, position: Int) {
         holder!!.companyImage.setImageResource(productItems[position].companyImage)
         holder!!.companyName.text = productItems[position].companyName
+        holder!!.productName.text = productItems[position].productName
         holder!!.productPriceBefore.text = productItems[position].productPriceBefore
         holder!!.productPriceAfter.text = productItems[position].productPriceAfter
         holder!!.productSurplus.text = productItems[position].productSurplus
