@@ -18,6 +18,9 @@
         </activity>
         <activity android:name=".ui.customer.CustomerActivity" />
         <activity android:name=".ui.seller.SellerActivity" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD0qbEDC7X13l12ZMyUFITq2kx2ieQ3S6M" />
     </application>
 
 </manifest>
