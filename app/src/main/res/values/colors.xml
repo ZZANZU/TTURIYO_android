@@ -6,4 +6,5 @@
     <color name="customerTabColor">#9b1f2a</color>
     <color name="white">#f4f6f7</color>
     <color name="grey">#bfbdbd</color>
+    <color name="black">#000000</color>
 </resources>

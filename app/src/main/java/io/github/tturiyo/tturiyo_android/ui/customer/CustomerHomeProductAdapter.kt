@@ -18,7 +18,6 @@ class CustomerHomeProductAdapter(private var productItems : ArrayList<CustomerHo
         holder!!.productPriceBefore.text = productItems[position].productPriceBefore
         holder!!.productPriceAfter.text = productItems[position].productPriceAfter
         holder!!.productSurplus.text = productItems[position].productSurplus
-        holder!!.productLike.setImageResource(productItems[position].productLike)
     }
 
     override fun getItemCount(): Int = productItems.size

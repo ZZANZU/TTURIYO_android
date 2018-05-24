@@ -16,5 +16,4 @@ class CustomerHomeProductViewHolder(itemView: View?) : RecyclerView.ViewHolder(i
     var productPriceBefore : TextView = itemView!!.findViewById(R.id.customer_home_product_cost_before)
     var productPriceAfter : TextView = itemView!!.findViewById(R.id.customer_home_product_cost_after)
     var productSurplus : TextView = itemView!!.findViewById(R.id.customer_home_product_surplus)
-    var productLike : ImageView = itemView!!.findViewById(R.id.customer_home_product_like)
 }
