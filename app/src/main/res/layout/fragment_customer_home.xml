@@ -32,6 +32,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
+                android:fontFamily="@font/nanumsquareregular"
                 />
 
         </android.support.v7.widget.Toolbar>
