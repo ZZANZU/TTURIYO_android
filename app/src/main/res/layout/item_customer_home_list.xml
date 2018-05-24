@@ -34,7 +34,7 @@
             android:id="@+id/customer_home_product_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="Company Name"
             android:textColor="@color/black"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/nanumsquare_regular"
             android:text="Product Name"
             android:textColor="@color/black"
@@ -58,16 +58,29 @@
             app:layout_constraintStart_toStartOf="@+id/customer_home_product_cost_after"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:layout_width="60dp"
+            android:layout_height="2dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#e90404"
+            app:layout_constraintBottom_toBottomOf="@+id/customer_home_product_cost_before"
+            app:layout_constraintEnd_toEndOf="@+id/customer_home_product_cost_before"
+            app:layout_constraintStart_toStartOf="@+id/customer_home_product_cost_before"
+            app:layout_constraintTop_toTopOf="@+id/customer_home_product_cost_before" />
+
         <TextView
             android:id="@+id/customer_home_product_cost_before"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="prior cost"
-            android:textSize="20dp"
             android:textColor="@color/black"
+            android:textSize="20dp"
             app:layout_constraintStart_toEndOf="@+id/customer_home_product_img"
             app:layout_constraintTop_toBottomOf="@+id/customer_home_product_company" />
 
@@ -87,7 +100,7 @@
             android:id="@+id/customer_home_product_cost_after"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="after cost"
             android:textColor="@color/black"
