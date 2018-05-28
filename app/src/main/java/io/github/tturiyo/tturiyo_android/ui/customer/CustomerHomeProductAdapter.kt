@@ -13,12 +13,7 @@ import io.github.tturiyo.tturiyo_android.data.CustomerHomeProduct
 class CustomerHomeProductAdapter(private var productItems : ArrayList<CustomerHomeProduct>)
     : RecyclerView.Adapter<CustomerHomeProductViewHolder>() {
     override fun onBindViewHolder(holder: CustomerHomeProductViewHolder, position: Int) {
-        holder!!.companyImage.setImageResource(productItems[position].companyImage)
-        holder!!.companyName.text = productItems[position].companyName
-        holder!!.productPriceBefore.text = productItems[position].productPriceBefore
-        holder!!.productPriceAfter.text = productItems[position].productPriceAfter
-        holder!!.productSurplus.text = productItems[position].productSurplus
-        holder!!.productLike.setImageResource(productItems[position].productLike)
+        holder.bind(productItems[position])
     }
 
     override fun getItemCount(): Int = productItems.size

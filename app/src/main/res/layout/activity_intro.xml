@@ -5,22 +5,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".ui.intro.IntroActivity"
     >
 
-    <Button
-        android:id="@+id/btn_seller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="판매자"
-        />
-
-    <Button
+    <LinearLayout
         android:id="@+id/btn_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="구매자"
-        />
+        android:layout_width="280dp"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_corner"
+        >
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/intro_button_img"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="구매"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:fontFamily="@font/nanumsquareregular"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_seller"
+        android:layout_width="280dp"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_corner"
+        >
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/intro_button_img"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="판매"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:fontFamily="@font/nanumsquareregular"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

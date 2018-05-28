@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.tturiyo.tturiyo_android">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
@@ -18,6 +21,9 @@
         </activity>
         <activity android:name=".ui.customer.CustomerActivity" />
         <activity android:name=".ui.seller.SellerActivity" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD0qbEDC7X13l12ZMyUFITq2kx2ieQ3S6M" />
     </application>
 
 </manifest>

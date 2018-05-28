@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ui.seller.SellerActivity"
     >
 
@@ -13,60 +14,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1.매장 이름 입력"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <EditText
         android:id="@+id/et_companyname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2.매장 주소 입력"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <EditText
         android:id="@+id/et_companylocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3.상품 등록"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <EditText
         android:id="@+id/et_productname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4.가격 설정"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <EditText
         android:id="@+id/et_productpriceafter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5.제한시간 설정"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <EditText
         android:id="@+id/et_productdue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
     <Button
@@ -74,6 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="등록"
+        android:fontFamily="@font/nanumsquareregular"
         />
 
 </LinearLayout>
