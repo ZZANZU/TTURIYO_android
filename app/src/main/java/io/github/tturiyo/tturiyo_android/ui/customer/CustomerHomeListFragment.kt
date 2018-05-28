@@ -7,38 +7,60 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.tturiyo.tturiyo_android.R
-import io.github.tturiyo.tturiyo_android.data.CustomerHomeProduct
-import kotlinx.android.synthetic.main.fragment_customer_home_list.*
+import io.github.tturiyo.tturiyo_android.data.Product
 import kotlinx.android.synthetic.main.fragment_customer_home_list.view.*
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import io.github.tturiyo.base.debug.Log
+import io.reactivex.subjects.BehaviorSubject
+
 
 /**
  * Created by user on 2018-05-22.
  */
 class CustomerHomeListFragment: Fragment() {
-    lateinit var mProductItems : ArrayList<CustomerHomeProduct>
+    val mProductItems :BehaviorSubject<List<Product>> = BehaviorSubject.createDefault(emptyList())
     lateinit var mCustomerHomeProductAdapter : CustomerHomeProductAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val mView = inflater.inflate(R.layout.fragment_customer_home_list, container, false)
 
-        mProductItems = ArrayList()
-
-        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "돈가스 떡볶이", "4000", "3000", "10개/23개", R.drawable.like_off_img))
-        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "떡볶이","4000", "3000", "10개/23개", R.drawable.like_off_img))
-        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "돈가스", "4000", "3000", "10개/23개", R.drawable.like_off_img))
-        mProductItems.add(CustomerHomeProduct(R.drawable.company_img, "떡뽀이"
-                , "순대", "4000", "3000", "10개/23개", R.drawable.like_off_img))
-
-
+        bindWithDataSource()
         mCustomerHomeProductAdapter = CustomerHomeProductAdapter(mProductItems)
 
         mView.customer_home_list_rv.layoutManager = LinearLayoutManager(activity)
         mView.customer_home_list_rv.adapter = mCustomerHomeProductAdapter
 
         return mView
+    }
+
+    private fun bindWithDataSource() {
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val result = ArrayList<Product>()
+
+                Log.d(dataSnapshot)
+                for (each in dataSnapshot.children) {
+                    val eachPojo: Product = each.getValue(Product::class.java)!!
+                    result.add(eachPojo)
+                }
+
+                mProductItems.onNext(result)
+                Log.d(result)
+                // ...
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.d(databaseError.toException())
+                // ...
+            }
+        }
+        val ref = FirebaseDatabase.getInstance().getReference("products")
+        ref.addValueEventListener(postListener)
     }
 
     companion object {

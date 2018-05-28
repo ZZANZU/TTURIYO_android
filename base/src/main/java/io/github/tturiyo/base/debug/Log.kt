@@ -23,16 +23,20 @@ object Log {
             val ste = Throwable().stackTrace
             val realMethod = ste[3]
 
-            val fileName: String = realMethod.fileName
+            val fileName: String = if (realMethod.fileName != null) {
+                realMethod.fileName
+            } else {
+                ""
+            }
 
             return fileName.subSequence(0, Math.min(fileName.length, TAG_LENGTHLIMIT)).toString()
         }
 
-    fun d(msg: String = "") {
-        android.util.Log.d(tag, prefix + msg)
+    fun d(msg: Any = "") {
+        android.util.Log.d(tag, "$prefix$msg")
     }
 
-    fun d(argTag: String = tag, msg: String) {
-        android.util.Log.d(argTag, prefix + msg)
+    fun d(argTag: String = tag, msg: Any) {
+        android.util.Log.d(argTag, "$prefix$msg")
     }
 }

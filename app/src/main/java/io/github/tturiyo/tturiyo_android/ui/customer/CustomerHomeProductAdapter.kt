@@ -4,19 +4,27 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.R
-import io.github.tturiyo.tturiyo_android.data.CustomerHomeProduct
+import io.github.tturiyo.tturiyo_android.data.Product
+import io.reactivex.subjects.BehaviorSubject
 
 /**
  * Created by user on 2018-05-22.
  */
-class CustomerHomeProductAdapter(private var productItems : ArrayList<CustomerHomeProduct>)
+class CustomerHomeProductAdapter(private var productItems: BehaviorSubject<List<Product>>)
     : RecyclerView.Adapter<CustomerHomeProductViewHolder>() {
-    override fun onBindViewHolder(holder: CustomerHomeProductViewHolder, position: Int) {
-        holder.bind(productItems[position])
+
+    init {
+        Log.d()
+        productItems.subscribe { notifyDataSetChanged() }
     }
 
-    override fun getItemCount(): Int = productItems.size
+    override fun onBindViewHolder(holder: CustomerHomeProductViewHolder, position: Int) {
+        holder.bind(productItems.value?.get(position)!!)
+    }
+
+    override fun getItemCount(): Int = productItems.value?.size!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerHomeProductViewHolder {
         val mainView : View = LayoutInflater.from(parent?.context)
