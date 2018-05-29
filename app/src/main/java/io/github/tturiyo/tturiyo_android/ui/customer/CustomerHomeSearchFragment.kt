@@ -5,15 +5,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.R
-import kotlinx.android.synthetic.main.fragment_customer_home_search.*
 import kotlinx.android.synthetic.main.fragment_customer_home_search.view.*
 
 /**
@@ -28,14 +24,10 @@ class CustomerHomeSearchFragment: Fragment(), OnMapReadyCallback {
 
         mMapView = mView.customer_search_map as MapView
         mMapView.onCreate(savedInstanceState)
-        mMapView.onResume()
         mMapView.getMapAsync(this)
+        mMapView.onResume()
 
         return mView
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onStart() {
@@ -82,13 +74,13 @@ class CustomerHomeSearchFragment: Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+//        MapsInitializer.initialize(activity)
+
         val anam = LatLng(37.58, 127.03)
 
         googleMap.addMarker(MarkerOptions().position(anam).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(anam))
     }
-
-
 
     companion object {
         private val ARG_SECTION_NUMBER = "section_number"

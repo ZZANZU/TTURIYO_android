@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".GlobalApplication"
@@ -23,7 +24,7 @@
         <activity android:name=".ui.seller.SellerActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD0qbEDC7X13l12ZMyUFITq2kx2ieQ3S6M" />
+            android:value="AIzaSyCa_9F0igzHOj_9VJCVSbKWJKP8ozefMic" />
     </application>
 
 </manifest>
