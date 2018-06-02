@@ -14,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="cf315ba3929de1da0e09db6c945dc249"/>
+
         <activity android:name=".ui.intro.IntroActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +24,6 @@
         </activity>
         <activity android:name=".ui.customer.CustomerActivity" />
         <activity android:name=".ui.seller.SellerActivity" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCa_9F0igzHOj_9VJCVSbKWJKP8ozefMic" />
     </application>
 
 </manifest>
