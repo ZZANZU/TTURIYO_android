@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.R
+import io.github.tturiyo.tturiyo_android.managers.CustomLocationManager
 import kotlinx.android.synthetic.main.fragment_customer_home_search.view.*
 
 /**
@@ -22,6 +23,7 @@ class CustomerHomeSearchFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d("customer home search fragment created!")
         val mView = inflater.inflate(R.layout.fragment_customer_home_search, container, false)
+        CustomLocationManager.init()
 
 //        mMapView = mView.customer_search_map as MapView
 //        mMapView.onCreate(savedInstanceState)
