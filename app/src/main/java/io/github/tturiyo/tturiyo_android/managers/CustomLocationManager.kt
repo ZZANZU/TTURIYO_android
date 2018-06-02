@@ -11,10 +11,13 @@ import android.location.LocationManager
 import android.support.v4.app.ActivityCompat
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.GlobalApplication
+import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 
 
 object CustomLocationManager: LocationListener {
     private val locationManager: LocationManager
+    private val locationSubject: BehaviorSubject<Location> = BehaviorSubject.create()
 
     init {
         Log.d()
@@ -36,6 +39,7 @@ object CustomLocationManager: LocationListener {
 
     override fun onLocationChanged(location: Location?) {
         Log.d("location=$location")
+        locationSubject.onNext(location!!)
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
@@ -48,6 +52,10 @@ object CustomLocationManager: LocationListener {
 
     override fun onProviderDisabled(provider: String?) {
         Log.d("provider=$provider")
+    }
+
+    fun getLocationsAsObservable(): Observable<Location> {
+        return locationSubject
     }
 
     fun init() {
