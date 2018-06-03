@@ -11,6 +11,8 @@ import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.tturiyo_android.R
 import io.github.tturiyo.tturiyo_android.ui.seller.map.MapFragment
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_seller.*
+import kotlinx.android.synthetic.main.fragment_seller_productlist.*
 import kotlinx.android.synthetic.main.fragment_seller_productlist.view.*
 
 class ProductListFragment : Fragment() {
@@ -43,6 +45,8 @@ class ProductListFragment : Fragment() {
                             BaseNavigator.gotoFragmentWithBackstack(this, MapFragment::class.java)
                         }
         )
+
+        activity!!.seller_toolbar_tv.setText("내 떠리요")
     }
 
     override fun onDestroy() {
