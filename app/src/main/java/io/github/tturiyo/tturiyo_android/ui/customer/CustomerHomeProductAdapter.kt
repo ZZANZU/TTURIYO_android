@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.R
-import io.github.tturiyo.tturiyo_android.data.Product
+import io.github.tturiyo.tturiyo_android.data.domain.Product
 import io.reactivex.subjects.BehaviorSubject
 
 /**

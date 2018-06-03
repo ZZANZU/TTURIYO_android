@@ -6,10 +6,16 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.view.RxView
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.debug.extLogd
+import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.tturiyo_android.R
+import io.github.tturiyo.tturiyo_android.data.domain.extToLocation
+import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.managers.chkPermissions
+import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
+import io.github.tturiyo.tturiyo_android.ui.seller.products.ProductListFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.fragment_seller_map.view.*
@@ -31,15 +37,40 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d()
+
         inflatedView = inflater.inflate(R.layout.fragment_seller_map, container, false)
         val mapView = inflatedView.mapview
         initMapWithCurrentLocation(mapView)
         initMapViewEventListener(mapView)
+        initView()
 
         return inflatedView
     }
 
+    private fun initView() {
+        Log.d()
+
+        disposables.add(
+                RxView.clicks(inflatedView.btn_back)
+                        .subscribe {
+
+                        }
+        )
+
+        disposables.add(
+                RxView.clicks(inflatedView.btn_confirm)
+                        .subscribe {
+                            ProductData.data.location = selectedLocationBehaviorSubject.value!!.extToLocation()
+                            ProductRepo.insert(item = ProductData.get(),
+                                    onSuccess = { BaseNavigator.gotoFragmentWithNoBackstack(this, ProductListFragment::class.java) })
+
+                        }
+        )
+    }
+
     private fun initMapWithCurrentLocation(mv: MapView) {
+        Log.d()
+
         if (chkPermissions(Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION)) {
             Log.d("RequestLocationUpdates")
@@ -50,6 +81,7 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
 
     private fun initMapViewEventListener(mv: MapView) {
         Log.d()
+
         disposables.add(
                 selectedLocationBehaviorSubject
                         .extLogd()
@@ -69,11 +101,20 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
                         }
         )
 
+        disposables.add(
+                selectedLocationBehaviorSubject
+                        .subscribe {
+                            inflatedView.btn_back.visibility = View.VISIBLE
+                            inflatedView.btn_confirm.visibility = View.VISIBLE
+                        }
+        )
+
         mv.setMapViewEventListener(this)
     }
 
     override fun onDestroy() {
         Log.d()
+
         disposables.dispose()
         super.onDestroy()
     }
@@ -124,12 +165,12 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
         Log.d()
     }
 
-    override fun onCurrentLocationUpdate(mv: MapView, p1: MapPoint?, p2: Float) {
+    override fun onCurrentLocationUpdate(mv: MapView, mp: MapPoint?, p2: Float) {
         Log.d()
-        Log.d("latitude=${p1!!.mapPointGeoCoord.latitude}, longitude=${p1.mapPointGeoCoord.longitude}")
+        Log.d("latitude=${mp!!.mapPointGeoCoord.latitude}, longitude=${mp.mapPointGeoCoord.longitude}")
         if (mv.currentLocationTrackingMode == MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading) {
             Log.d("mapView.currentLocationTrackingMode == MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading")
-            mv.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(p1.mapPointGeoCoord.latitude, p1.mapPointGeoCoord.longitude), false)
+            mv.setMapCenterPoint(mp, false)
             mv.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
         }
     }

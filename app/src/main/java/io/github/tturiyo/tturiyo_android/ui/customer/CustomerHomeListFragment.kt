@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.tturiyo.tturiyo_android.R
-import io.github.tturiyo.tturiyo_android.data.Product
+import io.github.tturiyo.tturiyo_android.data.domain.Product
 import kotlinx.android.synthetic.main.fragment_customer_home_list.view.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot

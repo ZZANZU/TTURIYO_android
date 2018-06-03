@@ -2,7 +2,7 @@ package io.github.tturiyo.tturiyo_android.ui.customer
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import io.github.tturiyo.tturiyo_android.data.Product
+import io.github.tturiyo.tturiyo_android.data.domain.Product
 import kotlinx.android.synthetic.main.item_customer_home_list.view.*
 
 /**

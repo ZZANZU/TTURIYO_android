@@ -1,4 +1,6 @@
-package io.github.tturiyo.tturiyo_android.data
+package io.github.tturiyo.tturiyo_android.data.domain
+
+import net.daum.mf.map.api.MapPoint
 
 /**
  * Created by user on 2018-05-22.
@@ -17,5 +19,18 @@ data class Product (
         var productPriceBefore: String = "",
         var productPriceAfter: String = "",
         var productSurplus: String = "",
-        var productLike: Int = 0
+        var productLike: Int = 0,
+        var location: Location = Location()
 )
+
+data class Location (
+        var latitude: Double = 0.0,
+        var longitude: Double = 0.0
+)
+
+fun MapPoint.extToLocation(): Location {
+    return Location().apply {
+        latitude = this@extToLocation.mapPointGeoCoord.latitude
+        longitude = this@extToLocation.mapPointGeoCoord.longitude
+    }
+}
