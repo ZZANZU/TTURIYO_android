@@ -1,91 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
-    tools:context=".ui.seller.SellerActivity"
+    tools:context=".ui.customer.CustomerActivity"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1.매장 이름 입력"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <EditText
-        android:id="@+id/et_companyname"
+    <FrameLayout
+        android:id="@+id/contentFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareregular"
+        android:layout_height="match_parent"
         />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2.매장 주소 입력"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <EditText
-        android:id="@+id/et_companylocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3.상품 등록"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <EditText
-        android:id="@+id/et_productname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4.가격 설정"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <EditText
-        android:id="@+id/et_productpriceafter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5.제한시간 설정"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <EditText
-        android:id="@+id/et_productdue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="등록"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
 </LinearLayout>
