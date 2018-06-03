@@ -27,20 +27,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2.매장 주소 입력"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <EditText
-        android:id="@+id/et_companylocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareregular"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="3.상품 등록"
         android:fontFamily="@font/nanumsquareregular"
         />
@@ -84,7 +70,7 @@
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="등록"
+        android:text="다 음"
         android:fontFamily="@font/nanumsquareregular"
         />
 
