@@ -5,20 +5,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.tturiyo_android.R
-import io.github.tturiyo.tturiyo_android.data.domain.Location
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.fragment_seller_register.*
 import io.reactivex.disposables.CompositeDisposable
-import io.github.tturiyo.tturiyo_android.data.file.getUuid
 import io.github.tturiyo.tturiyo_android.ui.seller.map.MapFragment
-import io.github.tturiyo.tturiyo_android.ui.seller.products.ProductListFragment
 import kotlinx.android.synthetic.main.activity_seller.*
 import kotlinx.android.synthetic.main.fragment_seller_register.view.*
 
@@ -71,16 +65,16 @@ class SellerProductRegisterFragment: Fragment() {
         )
 
         disposables.add(
-                RxView.clicks(inflatedView.btn_submit)
+                RxView.clicks(inflatedView.btn_next)
                         .subscribe {
-                            initFragment()
+                            changeFragment()
                         }
         )
 
         activity!!.seller_toolbar_tv.setText("추가하기")
     }
 
-    private fun initFragment() {
+    private fun changeFragment() {
         BaseNavigator.gotoFragmentWithBackstack(this, MapFragment::class.java)
     }
 
