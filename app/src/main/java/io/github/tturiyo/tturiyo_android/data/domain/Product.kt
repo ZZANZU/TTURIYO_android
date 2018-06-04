@@ -1,5 +1,6 @@
 package io.github.tturiyo.tturiyo_android.data.domain
 
+import io.github.tturiyo.base.debug.Log
 import net.daum.mf.map.api.MapPoint
 
 /**
@@ -28,9 +29,17 @@ data class Location (
         var longitude: Double = 0.0
 )
 
-fun MapPoint.extToLocation(): Location {
+fun void() {
+    Log.d(2.plus2())
+}
+
+fun Int.plus2(): Int {
+    return this + 2
+}
+
+fun MapPoint.toLocation(): Location {
     return Location().apply {
-        latitude = this@extToLocation.mapPointGeoCoord.latitude
-        longitude = this@extToLocation.mapPointGeoCoord.longitude
+        latitude = this@toLocation.mapPointGeoCoord.latitude
+        longitude = this@toLocation.mapPointGeoCoord.longitude
     }
 }

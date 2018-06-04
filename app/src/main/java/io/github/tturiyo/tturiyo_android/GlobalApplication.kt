@@ -3,8 +3,7 @@ package io.github.tturiyo.tturiyo_android
 import android.app.Application
 import android.content.Context
 import io.github.tturiyo.base.debug.Log
-import io.github.tturiyo.base.keys.getAppkey
-import io.github.tturiyo.tturiyo_android.data.file.extSaveOnInternalStorage
+import io.github.tturiyo.tturiyo_android.data.file.saveOnInternalStorage
 import io.github.tturiyo.tturiyo_android.data.file.hasUuidExists
 import java.lang.ref.WeakReference
 import java.util.*
@@ -33,7 +32,7 @@ class GlobalApplication : Application() {
             Log.d("Uuid not exists")
             val uniqueID = UUID.randomUUID().toString()
             Log.d("Generated uniqueID = $uniqueID")
-            extSaveOnInternalStorage(uniqueID)
+            saveOnInternalStorage(uniqueID)
         }
     }
 
