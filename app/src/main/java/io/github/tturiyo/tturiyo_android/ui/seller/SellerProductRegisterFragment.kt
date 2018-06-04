@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.github.tturiyo.base.debug.Log
+import io.github.tturiyo.base.debug.extLogd
 import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.tturiyo_android.R
 import io.reactivex.Observable
@@ -81,11 +82,5 @@ class SellerProductRegisterFragment: Fragment() {
     override fun onDestroy() {
         disposables.dispose()
         super.onDestroy()
-    }
-}
-
-fun <T> Observable<T>.extLogd(): Observable<T> {
-    return this.doOnNext {
-        Log.d("data=$it")
     }
 }
