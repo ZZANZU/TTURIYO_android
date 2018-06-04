@@ -11,11 +11,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.github.tturiyo.base.debug.Log
-import io.github.tturiyo.base.debug.extLogd
+import io.github.tturiyo.base.debug.logd
 import io.github.tturiyo.base.ui.BaseNavigator
+import io.github.tturiyo.tturiyo_android.GlobalApplication
 import io.github.tturiyo.tturiyo_android.R
-import io.github.tturiyo.tturiyo_android.R.id.*
-import io.github.tturiyo.tturiyo_android.data.domain.extToLocation
+import io.github.tturiyo.tturiyo_android.data.domain.toLocation
+import io.github.tturiyo.tturiyo_android.data.file.getUuid
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.managers.chkPermissions
 import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
@@ -65,8 +66,10 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
         disposables.add(
                 RxView.clicks(inflatedView.btn_confirm)
                         .subscribe {
-                            ProductData.data.location = selectedLocationBehaviorSubject.value!!.extToLocation()
-                            ProductRepo.insert(item = ProductData.get(),
+                            ProductData.data.location = selectedLocationBehaviorSubject.value!!.toLocation()
+                            val item = ProductData.get()
+                            item.uid = GlobalApplication.context.get()!!.getUuid()
+                            ProductRepo.insert(item = item,
                                     onSuccess = { BaseNavigator.gotoFragmentWithNoBackstack(this, ProductListFragment::class.java) })
 
                         }
@@ -91,7 +94,7 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
 
         disposables.add(
                 selectedLocationBehaviorSubject
-                        .extLogd()
+                        .logd()
                         .subscribe {
                             mv.removeAllPOIItems()
                             val marker = MapPOIItem()

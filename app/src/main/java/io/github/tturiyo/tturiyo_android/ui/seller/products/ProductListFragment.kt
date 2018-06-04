@@ -9,8 +9,12 @@ import com.jakewharton.rxbinding2.view.RxView
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.tturiyo_android.R
+import io.github.tturiyo.tturiyo_android.data.domain.Product
+import io.github.tturiyo.tturiyo_android.data.file.getUuid
+import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.ui.seller.SellerProductRegisterFragment
 import io.github.tturiyo.tturiyo_android.ui.seller.map.MapFragment
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_seller.*
 import kotlinx.android.synthetic.main.fragment_seller_productlist.*
@@ -45,6 +49,18 @@ class ProductListFragment : Fragment() {
                             Log.d("BaseNavigator.gotoFragmentWithBackstack(this, MapFragment::class.java)")
                             BaseNavigator.gotoFragmentWithBackstack(this, SellerProductRegisterFragment::class.java)
                         }
+        )
+
+        disposables.add(
+                ProductRepo.getListAsObservable().subscribe {
+                    Log.d("ProductRepo.getListAsObservable() it=$it")
+                }
+        )
+
+        disposables.add(
+                ProductRepo.getListWithUidAsObservable(context!!.getUuid()).subscribe {
+                    Log.d("ProductRepo.getListWithUidAsObservable it=$it")
+                }
         )
 
         activity!!.seller_toolbar_tv.setText("내 떠리요")
