@@ -6,7 +6,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding2.widget.RxTextView
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.debug.logd
 import io.github.tturiyo.base.ui.BaseNavigator
@@ -20,6 +23,7 @@ import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
 import io.github.tturiyo.tturiyo_android.ui.seller.products.ProductListFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
+import kotlinx.android.synthetic.main.activity_seller.*
 import kotlinx.android.synthetic.main.fragment_seller_map.view.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -70,6 +74,8 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
 
                         }
         )
+
+        activity!!.seller_toolbar_tv.setText("위치 확인")
     }
 
     private fun initMapWithCurrentLocation(mv: MapView) {

@@ -19,6 +19,7 @@ data class Product (
         var productName: String = "",
         var productPriceBefore: String = "",
         var productPriceAfter: String = "",
+        var productDue: String ="",
         var productSurplus: String = "",
         var productLike: Int = 0,
         var location: Location = Location()

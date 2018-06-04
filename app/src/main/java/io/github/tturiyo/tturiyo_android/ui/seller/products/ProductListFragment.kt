@@ -12,9 +12,12 @@ import io.github.tturiyo.tturiyo_android.R
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 import io.github.tturiyo.tturiyo_android.data.file.getUuid
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
+import io.github.tturiyo.tturiyo_android.ui.seller.SellerProductRegisterFragment
 import io.github.tturiyo.tturiyo_android.ui.seller.map.MapFragment
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_seller.*
+import kotlinx.android.synthetic.main.fragment_seller_productlist.*
 import kotlinx.android.synthetic.main.fragment_seller_productlist.view.*
 
 class ProductListFragment : Fragment() {
@@ -44,7 +47,7 @@ class ProductListFragment : Fragment() {
                 RxView.clicks(inflatedView.btn_add)
                         .subscribe {
                             Log.d("BaseNavigator.gotoFragmentWithBackstack(this, MapFragment::class.java)")
-                            BaseNavigator.gotoFragmentWithBackstack(this, MapFragment::class.java)
+                            BaseNavigator.gotoFragmentWithBackstack(this, SellerProductRegisterFragment::class.java)
                         }
         )
 
@@ -59,6 +62,8 @@ class ProductListFragment : Fragment() {
                     Log.d("ProductRepo.getListWithUidAsObservable it=$it")
                 }
         )
+
+        activity!!.seller_toolbar_tv.setText("내 떠리요")
     }
 
     override fun onDestroy() {

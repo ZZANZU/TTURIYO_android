@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:gravity="center"
+    tools:context=".ui.seller.SellerProductRegisterFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <!--가게 이미지-->
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@color/grey"
+            android:layout_gravity="center_vertical"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            >
+
+            <!--가게 이름, 상호명-->
+            <EditText
+                android:id="@+id/et_companyname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:layout_marginTop="@dimen/edittext_interval"
+                android:layout_marginBottom="@dimen/edittext_interval"
+                android:background="@layout/edittext_rounded_border"
+                android:hint="상호명"
+                android:fontFamily="@font/nanumsquareregular"
+                />
+
+            <!--연락처-->
+            <EditText
+                android:id="@+id/et_companycontact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:layout_marginBottom="@dimen/edittext_interval"
+                android:background="@layout/edittext_rounded_border"
+                android:hint="연락처"
+                android:fontFamily="@font/nanumsquareregular"
+                />
+
+            <!--상품 이름-->
+            <EditText
+                android:id="@+id/et_productname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:layout_marginBottom="@dimen/edittext_interval"
+                android:background="@layout/edittext_rounded_border"
+                android:hint="상품 이름"
+                android:fontFamily="@font/nanumsquareregular"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/edittext_interval"
+        android:weightSum="7"
+        >
+
+        <!--기존 가격-->
+        <EditText
+            android:id="@+id/et_productpricebefore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:background="@layout/edittext_rounded_border"
+            android:hint="기존 가격"
+            android:fontFamily="@font/nanumsquareregular"
+            android:layout_weight="3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="→"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            />
+
+        <!--할인 가격-->
+        <EditText
+            android:id="@+id/et_productpriceafter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:background="@layout/edittext_rounded_border"
+            android:hint="할인 가격"
+            android:fontFamily="@font/nanumsquareregular"
+            android:layout_weight="3"
+            />
+
+    </LinearLayout>
+
+    <!--재고-->
+    <EditText
+        android:id="@+id/et_productsurplus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:layout_marginBottom="@dimen/edittext_interval"
+        android:background="@layout/edittext_rounded_border"
+        android:hint="재고"
+        android:fontFamily="@font/nanumsquareregular"
+        />
+
+    <!--판매기간-->
+    <EditText
+        android:id="@+id/et_productdue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:layout_marginBottom="@dimen/edittext_interval"
+        android:background="@layout/edittext_rounded_border"
+        android:hint="판매기간"
+        android:fontFamily="@font/nanumsquareregular"
+        />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="다 음"
+        android:fontFamily="@font/nanumsquareregular"
+        />
+
+</LinearLayout>
