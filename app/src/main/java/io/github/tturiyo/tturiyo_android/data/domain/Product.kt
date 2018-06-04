@@ -2,6 +2,7 @@ package io.github.tturiyo.tturiyo_android.data.domain
 
 import io.github.tturiyo.base.debug.Log
 import net.daum.mf.map.api.MapPoint
+import java.util.*
 
 /**
  * Created by user on 2018-05-22.
@@ -16,12 +17,12 @@ data class Product (
         var uid: String = "",
         var companyImage: Int = 0,
         var companyName: String = "",
+        var companyContact: String = "",
         var productName: String = "",
-        var productPriceBefore: String = "",
-        var productPriceAfter: String = "",
-        var productDue: String ="",
-        var productSurplus: String = "",
-        var productLike: Int = 0,
+        var productPriceBefore: Int = 0,
+        var productPriceAfter: Int = 0,
+        var numberOfStock: Int = 0,
+        var productDue: Date = Date(),
         var location: Location = Location()
 )
 

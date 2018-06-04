@@ -61,16 +61,7 @@ object BaseNavigator {
     private fun gotoFragment(parent: FragmentActivity?, childClazz: Class<out Fragment>, @IdRes containerId: Int, leaveBackstack: Boolean) {
         Log.d(TAG, "gotoFragmentWithBackstack: ")
 
-        var newFragment: Fragment? = null
-        try {
-            newFragment = childClazz.newInstance()
-        } catch (e: InstantiationException) {
-            e.printStackTrace()
-            return
-        } catch (e: IllegalAccessException) {
-            e.printStackTrace()
-            return
-        }
+        val newFragment = childClazz.newInstance()
 
         val supportFragmentManager = parent!!.supportFragmentManager
         if (!leaveBackstack) {

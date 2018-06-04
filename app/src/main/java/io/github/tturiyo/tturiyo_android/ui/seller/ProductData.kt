@@ -3,7 +3,7 @@ package io.github.tturiyo.tturiyo_android.ui.seller
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 
 object ProductData {
-    fun get(): Product {
+    fun getAndClear(): Product {
         val result = data
         data = Product()
 
