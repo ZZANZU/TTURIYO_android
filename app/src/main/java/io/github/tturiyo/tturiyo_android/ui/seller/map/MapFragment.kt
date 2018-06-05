@@ -93,6 +93,7 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
                 selectedLocationBehaviorSubject
                         .logd()
                         .subscribe {
+                            it.mapPointGeoCoord.latitude
                             mv.removeAllPOIItems()
                             val marker = MapPOIItem()
                             marker.itemName = ""
