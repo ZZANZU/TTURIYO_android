@@ -33,28 +33,28 @@ class SellerActivity : AppCompatActivity() {
                         .map { it.editable().toString() }
                         .extLogd()
                         .subscribe {
-                            ProductData.data.companyname = it
+                            ProductData.data.companyName = it
                         },
-                RxTextView.afterTextChangeEvents(et_companylocation)
-                        .map { it.editable().toString() }
-                        .subscribe {
-                            ProductData.data.companylocation = it
-                        },
+//                RxTextView.afterTextChangeEvents(et_companylocation)
+//                        .map { it.editable().toString() }
+//                        .subscribe {
+//                            ProductData.data.companylocation = it
+//                        },
                 RxTextView.afterTextChangeEvents(et_productname)
                         .map { it.editable().toString() }
                         .subscribe {
-                            ProductData.data.productname = it
+                            ProductData.data.productName = it
                         },
                 RxTextView.afterTextChangeEvents(et_productpriceafter)
                         .map { it.editable().toString() }
                         .subscribe {
-                            ProductData.data.productpriceafter = it
-                        },
-                RxTextView.afterTextChangeEvents(et_productdue)
-                        .map { it.editable().toString() }
-                        .subscribe {
-                            ProductData.data.productdue = it
+                            ProductData.data.productPriceAfter = it
                         }
+//                RxTextView.afterTextChangeEvents(et_productdue)
+//                        .map { it.editable().toString() }
+//                        .subscribe {
+//                            ProductData.data.productdue = it
+//                        }
                 )
 
         disposables.add(

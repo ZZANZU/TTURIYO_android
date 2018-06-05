@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:name=".GlobalApplication"
@@ -13,6 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="cf315ba3929de1da0e09db6c945dc249"/>
+
         <activity android:name=".ui.intro.IntroActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +25,6 @@
         </activity>
         <activity android:name=".ui.customer.CustomerActivity" />
         <activity android:name=".ui.seller.SellerActivity" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD0qbEDC7X13l12ZMyUFITq2kx2ieQ3S6M" />
     </application>
 
 </manifest>

@@ -1,16 +1,25 @@
 package io.github.tturiyo.tturiyo_android
 
 import android.app.Application
+import android.content.Context
 import io.github.tturiyo.base.debug.Log
+import io.github.tturiyo.base.keys.getAppkey
 import io.github.tturiyo.tturiyo_android.data.file.extSaveOnInternalStorage
 import io.github.tturiyo.tturiyo_android.data.file.hasUuidExists
+import java.lang.ref.WeakReference
 import java.util.*
 
 
 class GlobalApplication : Application() {
+    companion object {
+        var context: WeakReference<Context> = WeakReference<Context>(null)
+    }
+
     override fun onCreate() {
         super.onCreate()
         Log.d()
+        context = WeakReference(this)
+//        Log.d("Appkey: ${this.getAppkey()}")
 
         initUuid()
     }
@@ -26,5 +35,10 @@ class GlobalApplication : Application() {
             Log.d("Generated uniqueID = $uniqueID")
             extSaveOnInternalStorage(uniqueID)
         }
+    }
+
+    override fun onTerminate() {
+        context = WeakReference<Context>(null)
+        super.onTerminate()
     }
 }
