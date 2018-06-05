@@ -51,9 +51,9 @@ class CustomerHomeListFragment: Fragment() {
 
         fun newInstance(sectionNumber: Int): CustomerHomeListFragment {
             val fragment = CustomerHomeListFragment()
-//            val args = Bundle()
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-//            fragment.arguments = args
+            val args = Bundle()
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+            fragment.arguments = args
             return fragment
         }
     }

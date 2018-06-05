@@ -12,14 +12,13 @@ import java.util.*
  * 5. productName - 상품 이름
  * 6. productPriceBefore - 상품 정가
  * 7. productPriceAfter - 상품 할인가
- * 8. numberOfStock - 남은 상품 재고
- * 9. totalOfStock - 총 상품 재고
- * 10. productDue - 할인 기간
- * 11. location - 가게 위치(위도, 경도)
+ * 8. numberOfStock - 상품 재고 수
+ * 9. productDue - 할인 기간
+ * 10. location - 가게 위치(위도, 경도)
  */
 data class Product (
         var uid: String = "",
-        var companyImage: Uri,
+        var companyImage: Int = 0,
         var companyName: String = "",
         var companyContact: String = "",
         var productName: String = "",
