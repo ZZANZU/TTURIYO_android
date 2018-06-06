@@ -5,8 +5,30 @@ import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.debug.assertDebug
 import io.reactivex.Single
 import io.reactivex.subjects.SingleSubject
+import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+
+fun MapView.clear() {
+    Log.d()
+    this.removeAllPOIItems()
+}
+
+fun MapView.drawMarkers(mapPoints: List<MapPoint>) {
+    Log.d()
+    mapPoints.forEach {
+        val marker = MapPOIItem()
+        marker.itemName = ""
+        marker.tag = 0
+        marker.mapPoint = it
+        marker.markerType = MapPOIItem.MarkerType.BluePin
+        marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+        marker.isShowDisclosureButtonOnCalloutBalloon = false
+        marker.isShowCalloutBalloonOnTouch = false
+
+        this.addPOIItem(marker)
+    }
+}
 
 fun MapView.focusCurrentLocationOnce() {
     Log.d()

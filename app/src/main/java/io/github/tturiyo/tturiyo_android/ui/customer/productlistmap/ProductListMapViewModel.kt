@@ -5,11 +5,15 @@ import android.content.Context
 import android.databinding.ObservableField
 import android.view.View
 import io.github.tturiyo.base.debug.Log
+import io.github.tturiyo.base.viewmodel.toObservable
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
+import io.github.tturiyo.tturiyo_android.managers.clear
+import io.github.tturiyo.tturiyo_android.managers.drawMarkers
 import io.github.tturiyo.tturiyo_android.managers.focusCurrentLocationOnce
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_customer_productlistmap.view.*
+import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
 
@@ -43,6 +47,18 @@ class ProductListMapViewModel() : ViewModel() {
         Log.d()
 
         mapView.focusCurrentLocationOnce()
+        productList.toObservable()
+                .map {
+                    it.map {
+                        it.location
+                    }.map {
+                        MapPoint.mapPointWithGeoCoord(it.latitude, it.longitude)
+                    }
+                }.subscribe {
+                    Log.d("drawMarker / productList.toObservable().subscribe it=$it")
+                    mapView.clear()
+                    mapView.drawMarkers(it)
+                }
     }
 
     override fun onCleared() {
