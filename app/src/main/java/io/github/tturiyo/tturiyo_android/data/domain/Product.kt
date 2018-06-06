@@ -23,6 +23,7 @@ data class Product (
         var productName: String = "",
         var productPriceBefore: Int = 0,
         var productPriceAfter: Int = 0,
+        var currentStock: Int = 0,
         var numberOfStock: Int = 0,
         var productDue: Long = Date().time,
         var location: Location = Location()

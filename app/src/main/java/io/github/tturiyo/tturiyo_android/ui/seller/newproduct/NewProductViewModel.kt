@@ -45,7 +45,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
         putTemporalValues()
 
         disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_companyname)
+                RxTextView.afterTextChangeEvents(inflatedView.et_companyName)
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .logd()
@@ -58,7 +58,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
         )
 
         disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_companycontact)
+                RxTextView.afterTextChangeEvents(inflatedView.et_companyContact)
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .subscribe {
@@ -70,7 +70,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
         )
 
         disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_productname)
+                RxTextView.afterTextChangeEvents(inflatedView.et_productName)
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .subscribe {

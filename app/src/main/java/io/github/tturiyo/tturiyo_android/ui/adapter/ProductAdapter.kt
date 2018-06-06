@@ -13,6 +13,13 @@ import io.github.tturiyo.tturiyo_android.data.domain.Product
  */
 class ProductAdapter(private var items: List<Product> = emptyList())
     : BaseRecyclerViewAdapter<Product, ProductViewHolder>() {
+    companion object {
+        const val UNEXPANDED = 0
+        const val EXPANDED = 1
+    }
+
+    private var focusedItem = -1
+
     override fun setItems(items: List<Product>) {
         Log.d()
         this.items = items
@@ -23,12 +30,27 @@ class ProductAdapter(private var items: List<Product> = emptyList())
         holder.bind(items[position])
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (position == focusedItem) {
+            EXPANDED
+        } else {
+            UNEXPANDED
+        }
+    }
+
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val mainView : View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_product, parent,false)
+        val mainView: View = when (viewType) {
+            UNEXPANDED -> LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_product, parent, false)
+            else -> LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_product_expanded, parent, false)
+        }
 
-        return ProductViewHolder(mainView)
+        return ProductViewHolder(mainView, {
+            focusedItem = it
+            notifyDataSetChanged()
+        })
     }
 }
