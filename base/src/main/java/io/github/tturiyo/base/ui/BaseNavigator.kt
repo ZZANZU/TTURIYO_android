@@ -7,21 +7,31 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.ViewGroup
-
-private val TAG = "BaseNavigator"
+import io.github.tturiyo.base.debug.Log
 
 object BaseNavigator {
+    fun gotoFragmentWithClearingBackstack(parent: Fragment, childClazz: Class<out Fragment>) {
+        Log.d()
+
+        val supportFragmentManager = parent.activity!!.supportFragmentManager!!
+        for (iteration in 0..supportFragmentManager.backStackEntryCount) {
+            Log.d("supportFragmentManager.popBackStack()")
+            supportFragmentManager.popBackStack()
+        }
+
+        gotoFragmentWithBackstack(parent, childClazz)
+    }
+
     fun gotoActivityWithNoBackstack(parent: Activity, childClazz: Class<out Activity>) {
-        Log.d(TAG, "gotoActivity: ")
+        Log.d("gotoActivity: ")
 
         gotoActivityWithBackstack(parent, childClazz)
         parent.finish()
     }
 
     fun gotoActivityWithBackstack(parent: Activity, childClazz: Class<out Activity>) {
-        Log.d(TAG, "gotoActivity: ")
+        Log.d("gotoActivity: ")
 
         val intent = Intent(parent, childClazz)
         ContextCompat.startActivity(parent, intent, null)
@@ -59,7 +69,7 @@ object BaseNavigator {
     }
 
     private fun gotoFragment(parent: FragmentActivity?, childClazz: Class<out Fragment>, @IdRes containerId: Int, leaveBackstack: Boolean) {
-        Log.d(TAG, "gotoFragmentWithBackstack: ")
+        Log.d("gotoFragmentWithBackstack: ")
 
         val newFragment = childClazz.newInstance()
 

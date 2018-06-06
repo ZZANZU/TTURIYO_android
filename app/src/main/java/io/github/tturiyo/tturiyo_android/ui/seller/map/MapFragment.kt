@@ -67,8 +67,7 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
                             val item = ProductData.getAndClear()
                             item.uid = GlobalApplication.context.get()!!.getUuid()
                             ProductRepo.insert(item = item,
-                                    onSuccess = { BaseNavigator.gotoFragmentWithNoBackstack(this, ProductListFragment::class.java) })
-
+                                    onSuccess = { BaseNavigator.gotoFragmentWithClearingBackstack(this, ProductListFragment::class.java) })
                         }
         )
 

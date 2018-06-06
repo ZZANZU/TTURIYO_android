@@ -1,6 +1,5 @@
 package io.github.tturiyo.tturiyo_android.data.domain
 
-import android.net.Uri
 import net.daum.mf.map.api.MapPoint
 import java.util.*
 
@@ -25,7 +24,7 @@ data class Product (
         var productPriceBefore: Int = 0,
         var productPriceAfter: Int = 0,
         var numberOfStock: Int = 0,
-        var productDue: Date = Date(),
+        var productDue: Long = Date().time,
         var location: Location = Location()
 )
 

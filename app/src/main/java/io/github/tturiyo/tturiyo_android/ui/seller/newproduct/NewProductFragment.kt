@@ -17,7 +17,7 @@ import io.github.tturiyo.tturiyo_android.ui.seller.map.MapFragment
 import kotlinx.android.synthetic.main.activity_seller.*
 
 
-class NewProductFragment: Fragment() {
+class NewProductFragment: Fragment(), NewProductNavigator {
     companion object {
         fun newInstance(): NewProductFragment {
             Log.d()
@@ -39,7 +39,9 @@ class NewProductFragment: Fragment() {
         inflatedView = binding.root
 
         vm = ViewModelProviders
-                .of(this, ViewModelFactory())
+                .of(this, ViewModelFactory(
+                        this
+                ))
                 .get(NewProductViewModel::class.java)
         binding.vm = vm
 
@@ -55,7 +57,9 @@ class NewProductFragment: Fragment() {
         activity!!.seller_toolbar_tv.setText("추가하기")
     }
 
-    private fun changeFragment() {
+    override fun gotoMapFragment() {
+        Log.d()
+
         BaseNavigator.gotoFragmentWithBackstack(this, MapFragment::class.java)
     }
 

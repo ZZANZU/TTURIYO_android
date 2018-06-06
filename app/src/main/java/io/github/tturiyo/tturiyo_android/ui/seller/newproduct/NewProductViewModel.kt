@@ -11,13 +11,12 @@ import io.github.tturiyo.base.viewmodel.toObservable
 import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_seller_newproduct.view.*
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.util.*
 
 
-class NewProductViewModel() : ViewModel() {
+class NewProductViewModel(private var navigator: NewProductNavigator) : ViewModel() {
     private val disposables = CompositeDisposable()
+
     val companyName = ObservableField<String>("")
     val companyContact = ObservableField<String>("")
     val productName = ObservableField<String>("")
@@ -153,10 +152,9 @@ class NewProductViewModel() : ViewModel() {
         disposables.add(
                 RxView.clicks(inflatedView.btn_next)
                         .subscribe {
-//                            changeFragment()
+                            navigator.gotoMapFragment()
                         }
         )
-
     }
 
     override fun onCleared() {
