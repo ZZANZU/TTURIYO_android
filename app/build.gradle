@@ -9,8 +9,8 @@ android {
         applicationId "io.github.tturiyo.tturiyo_android"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode version_code
+        versionName "$version_name"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 

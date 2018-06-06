@@ -31,6 +31,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
     init {
     }
 
+
 //    private fun putTemporalValues() {
 //        Log.d()
 //        companyName.set("양이컴퍼니")

@@ -3,6 +3,7 @@ package io.github.tturiyo.tturiyo_android
 import android.app.Application
 import android.content.Context
 import io.github.tturiyo.base.debug.Log
+import io.github.tturiyo.base.keys.getAppkey
 import io.github.tturiyo.tturiyo_android.data.file.saveOnInternalStorage
 import io.github.tturiyo.tturiyo_android.data.file.hasUuidExists
 import java.lang.ref.WeakReference
