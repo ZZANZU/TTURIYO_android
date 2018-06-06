@@ -11,6 +11,8 @@ import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.base.viewmodel.ViewModelFactory
 import io.github.tturiyo.tturiyo_android.R
+import io.github.tturiyo.tturiyo_android.data.domain.Product
+import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.databinding.FragmentSellerProductlistBinding
 import io.github.tturiyo.tturiyo_android.ui.seller.newproduct.NewProductFragment
 import kotlinx.android.synthetic.main.activity_seller.*
@@ -54,14 +56,25 @@ class SellerProductListFragment : Fragment(), SellerProductListNavigator {
         activity!!.seller_toolbar_tv.text = s
     }
 
+    override fun onDestroy() {
+        Log.d()
+
+        super.onDestroy()
+    }
+
     override fun gotoNewProductFragment() {
         Log.d()
         BaseNavigator.gotoFragmentWithBackstack(this, NewProductFragment::class.java)
     }
 
-    override fun onDestroy() {
+    override fun modify(product: Product) {
+        Log.d()
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun delete(product: Product) {
         Log.d()
 
-        super.onDestroy()
+        ProductRepo.delete(product)
     }
 }

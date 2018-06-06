@@ -8,12 +8,12 @@ import android.view.View
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
-import io.github.tturiyo.tturiyo_android.ui.adapter.ProductAdapter
+import io.github.tturiyo.tturiyo_android.ui.adapter.CustomerProductAdapter
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_customer_productlist.view.*
 
 
-class CustomerProductListViewModel() : ViewModel() {
+class CustomerProductListViewModel(private val navigator: CustomerProductListNavigator) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     val productList: ObservableField<List<Product>> = ObservableField(emptyList())
@@ -35,7 +35,7 @@ class CustomerProductListViewModel() : ViewModel() {
     fun attachView(inflatedView: View, ctx: Context) {
         Log.d()
 
-        inflatedView.recyclerview_productList.adapter = ProductAdapter()
+        inflatedView.recyclerview_productList.adapter = CustomerProductAdapter(navigator = navigator)
         inflatedView.recyclerview_productList.layoutManager = LinearLayoutManager(ctx)
     }
 

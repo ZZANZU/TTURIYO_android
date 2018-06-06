@@ -10,13 +10,15 @@ import android.view.ViewGroup
 import io.github.tturiyo.tturiyo_android.R
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.viewmodel.ViewModelFactory
+import io.github.tturiyo.tturiyo_android.data.domain.Product
+import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.databinding.FragmentCustomerProductlistBinding
 
 
 /**
  * Created by user on 2018-05-22.
  */
-class CustomerProductListFragment: Fragment() {
+class CustomerProductListFragment: Fragment(), CustomerProductListNavigator {
     companion object {
         fun newInstance(): CustomerProductListFragment {
             return CustomerProductListFragment()
@@ -25,7 +27,7 @@ class CustomerProductListFragment: Fragment() {
 
     private lateinit var inflatedView: View
     private val viewModel: CustomerProductListViewModel by lazy {
-        ViewModelProviders.of(this, ViewModelFactory())
+        ViewModelProviders.of(this, ViewModelFactory(this))
                 .get(CustomerProductListViewModel::class.java)
     }
 
@@ -42,5 +44,14 @@ class CustomerProductListFragment: Fragment() {
         binding.vm = viewModel
 
         return v
+    }
+
+    override fun buy(product: Product) {
+        Log.d()
+
+        val updatedProduct = product.also {
+            it.currentStock -= 1
+        }
+        ProductRepo.update(updatedProduct)
     }
 }

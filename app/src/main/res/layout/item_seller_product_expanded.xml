@@ -157,18 +157,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/customer_home_product_img"
-            app:layout_constraintBaseline_toBaselineOf="@+id/btn_buy"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btn_modify"
             tools:text="18.05.23. 23:00 까지"
             />
 
         <Button
-            android:id="@+id/btn_buy"
+            android:id="@+id/btn_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/frame_stock"
+            app:layout_constraintTop_toBottomOf="@+id/frame_stock"
+            android:background="@drawable/selector_rounded_corner_btn_white"
+            android:text="수정"
+            />
+
+        <Button
+            android:id="@+id/btn_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frame_stock"
-            android:text="결제하기"
+            android:background="@drawable/selector_rounded_corner_btn_white"
+            android:text="삭제"
             />
 
     </android.support.constraint.ConstraintLayout>

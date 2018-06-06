@@ -139,7 +139,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                 RxView.clicks(inflatedView.et_productdue)
                         .subscribe {
                             TimePickerDialog(ctx,
-                                    TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                                    TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
                                         val calendar = Calendar.getInstance()
                                         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                                         calendar.set(Calendar.MINUTE, minute)

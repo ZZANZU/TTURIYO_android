@@ -11,7 +11,7 @@ import io.github.tturiyo.tturiyo_android.GlobalApplication
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 import io.github.tturiyo.tturiyo_android.data.file.getUuid
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
-import io.github.tturiyo.tturiyo_android.ui.adapter.ProductAdapter
+import io.github.tturiyo.tturiyo_android.ui.adapter.SellerProductAdapter
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_seller_productlist.view.*
 
@@ -47,7 +47,7 @@ class SellerProductListViewModel(private val navigator: SellerProductListNavigat
                         }
         )
 
-        inflatedView.recyclerview_sellerproductlist.adapter = ProductAdapter()
+        inflatedView.recyclerview_sellerproductlist.adapter = SellerProductAdapter(navigator = navigator)
         inflatedView.recyclerview_sellerproductlist.layoutManager = LinearLayoutManager(ctx)
     }
 

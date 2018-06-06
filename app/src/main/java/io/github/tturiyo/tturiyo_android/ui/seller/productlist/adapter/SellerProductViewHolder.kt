@@ -6,13 +6,17 @@ import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.utils.toDateTimeFormat
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 import kotlinx.android.synthetic.main.item_product.view.*
-import kotlinx.android.synthetic.main.item_product_expanded.view.tv_due
+import kotlinx.android.synthetic.main.item_seller_product_expanded.view.btn_delete
+import kotlinx.android.synthetic.main.item_seller_product_expanded.view.btn_modify
+import kotlinx.android.synthetic.main.item_seller_product_expanded.view.tv_due
 
 /**
  * Created by user on 2018-05-22.
  */
-class ProductViewHolder(itemView: View,
-                        onItemClicked: (Int) -> Unit) : RecyclerView.ViewHolder(itemView) {
+class SellerProductViewHolder(itemView: View,
+                        onItemClicked: (Int) -> Unit,
+                        private val onBtnClicked: (item: Int, btnRes: Int) -> Unit)
+    : RecyclerView.ViewHolder(itemView) {
 
     init {
         Log.d()
@@ -23,6 +27,15 @@ class ProductViewHolder(itemView: View,
 
     fun bind(item: Product) {
         bindWith(itemView, item)
+        if (itemView.tv_due != null) {
+            itemView.btn_delete.setOnClickListener {
+                onBtnClicked(adapterPosition, itemView.btn_delete.id)
+            }
+
+            itemView.btn_modify.setOnClickListener {
+                onBtnClicked(adapterPosition, itemView.btn_modify.id)
+            }
+        }
     }
 }
 
