@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import io.github.tturiyo.base.debug.Log
+import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.reactivex.subjects.BehaviorSubject
 
 
@@ -27,7 +28,7 @@ class CustomerHomeListFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val mView = inflater.inflate(R.layout.fragment_customer_home_list, container, false)
 
-        bindWithDataSource()
+        initData()
         mCustomerHomeProductAdapter = CustomerHomeProductAdapter(mProductItems)
 
         mView.customer_home_list_rv.layoutManager = LinearLayoutManager(activity)
@@ -36,31 +37,13 @@ class CustomerHomeListFragment: Fragment() {
         return mView
     }
 
-    private fun bindWithDataSource() {
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                val result = ArrayList<Product>()
+    private fun initData() {
+        Log.d()
 
-                Log.d(dataSnapshot)
-                for (each in dataSnapshot.children) {
-                    val eachPojo: Product = each.getValue(Product::class.java)!!
-                    result.add(eachPojo)
-                }
-
-                mProductItems.onNext(result)
-                Log.d(result)
-                // ...
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.d(databaseError.toException())
-                // ...
-            }
+        ProductRepo.getListAsObservable().subscribe {
+            // do something
+            mProductItems.onNext(it)
         }
-        val ref = FirebaseDatabase.getInstance().getReference("products")
-        ref.addValueEventListener(postListener)
     }
 
     companion object {
@@ -68,9 +51,9 @@ class CustomerHomeListFragment: Fragment() {
 
         fun newInstance(sectionNumber: Int): CustomerHomeListFragment {
             val fragment = CustomerHomeListFragment()
-//            val args = Bundle()
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-//            fragment.arguments = args
+            val args = Bundle()
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+            fragment.arguments = args
             return fragment
         }
     }

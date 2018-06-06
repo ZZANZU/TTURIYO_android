@@ -7,19 +7,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding2.widget.RxTextView
 import io.github.tturiyo.base.debug.Log
-import io.github.tturiyo.base.debug.logd
 import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.base.viewmodel.ViewModelFactory
 import io.github.tturiyo.tturiyo_android.R
 import io.github.tturiyo.tturiyo_android.databinding.FragmentSellerNewproductBinding
-import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
 import io.reactivex.disposables.CompositeDisposable
 import io.github.tturiyo.tturiyo_android.ui.seller.map.MapFragment
 import kotlinx.android.synthetic.main.activity_seller.*
-import kotlinx.android.synthetic.main.fragment_seller_newproduct.view.*
 
 
 class NewProductFragment: Fragment() {
