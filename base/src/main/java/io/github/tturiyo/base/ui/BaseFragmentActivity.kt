@@ -26,7 +26,7 @@ open class BaseFragmentActivity : AppCompatActivity() {
         BaseNavigator.gotoFragmentWithActivity(this, initialFragmentClazz!!, contentFrameId)
     }
 
-    override fun onBackPressed() {
+    open override fun onBackPressed() {
         Log.d()
 
         assertDebug(contentFrameId != 0)

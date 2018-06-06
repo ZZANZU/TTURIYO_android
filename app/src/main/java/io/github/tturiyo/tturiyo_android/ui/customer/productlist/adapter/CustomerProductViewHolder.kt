@@ -1,5 +1,6 @@
 package io.github.tturiyo.tturiyo_android.ui.adapter
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import io.github.tturiyo.base.debug.Log
@@ -26,9 +27,21 @@ class CustomerProductViewHolder(itemView: View,
 
     fun bind(item: Product) {
         bindWith(itemView, item)
-        if (itemView.tv_due != null) {
+        if (itemView.btn_buy != null) {
             itemView.btn_buy.setOnClickListener {
                 onBtnClicked(adapterPosition, itemView.btn_buy.id)
+            }
+        }
+
+        if (item.currentStock <= 0) {
+            itemView.setBackgroundColor(Color.LTGRAY)
+            if (itemView.btn_buy != null) {
+                itemView.btn_buy.isEnabled = false
+            }
+        } else {
+            itemView.setBackgroundColor(Color.WHITE)
+            if (itemView.btn_buy != null) {
+                itemView.btn_buy.isEnabled = true
             }
         }
     }

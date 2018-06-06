@@ -39,7 +39,7 @@ class ProductListMapFragment: Fragment() {
         viewModel.attachView(v, context!!)
         binding.vm = viewModel
 
-        return inflatedView
+        return v
     }
 
     override fun onResume() {

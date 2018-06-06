@@ -65,6 +65,58 @@ object poiItemEventListener: MapView.POIItemEventListener {
     }
 }
 
+object eventListener: MapView.MapViewEventListener {
+    var notifier: BehaviorSubject<MapPoint>? = null
+
+    override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint) {
+        Log.d()
+        notifier?.onNext(p1)
+    }
+
+    override fun onMapViewInitialized(p0: MapView?) {
+        Log.d()
+    }
+
+    override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewMoveFinished(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewCenterPointMoved(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewDragEnded(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewSingleTapped(p0: MapView?, p1: MapPoint) {
+        Log.d()
+        notifier?.onNext(p1)
+    }
+
+    override fun onMapViewZoomLevelChanged(p0: MapView?, p1: Int) {
+        Log.d()
+    }
+
+    override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+}
+
+fun MapView.getMapClickedObservable(): BehaviorSubject<MapPoint> {
+    val notifier = BehaviorSubject.create<MapPoint>()
+    Log.d()
+
+    eventListener.notifier = notifier
+    this.setMapViewEventListener(eventListener)
+
+    return notifier
+}
+
 fun MapView.selectMarker(idx: Int) {
     Log.d("idx=$idx")
     val marker = this.findPOIItemByTag(idx)

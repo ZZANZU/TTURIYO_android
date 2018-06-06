@@ -168,6 +168,7 @@
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frame_stock"
+            android:background="@drawable/selector_rounded_corner_btn_white"
             android:text="결제하기"
             />
 

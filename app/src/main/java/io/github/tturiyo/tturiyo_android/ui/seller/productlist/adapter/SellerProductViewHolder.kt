@@ -1,5 +1,6 @@
 package io.github.tturiyo.tturiyo_android.ui.adapter
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import io.github.tturiyo.base.debug.Log
@@ -35,6 +36,12 @@ class SellerProductViewHolder(itemView: View,
             itemView.btn_modify.setOnClickListener {
                 onBtnClicked(adapterPosition, itemView.btn_modify.id)
             }
+        }
+
+        if (item.currentStock <= 0) {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        } else {
+            itemView.setBackgroundColor(Color.WHITE)
         }
     }
 }

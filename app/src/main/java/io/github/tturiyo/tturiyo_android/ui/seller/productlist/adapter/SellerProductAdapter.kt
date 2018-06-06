@@ -62,7 +62,10 @@ class SellerProductAdapter(private var items: List<Product> = emptyList(),
                 onBtnClicked = { item: Int, btnRes: Int ->
                     when (btnRes) {
                         R.id.btn_modify -> navigator.modify(items[item])
-                        R.id.btn_delete -> navigator.delete(items[item])
+                        R.id.btn_delete -> {
+                            navigator.delete(items[item])
+                            focusedItem = -1
+                        }
                     }
                 })
     }

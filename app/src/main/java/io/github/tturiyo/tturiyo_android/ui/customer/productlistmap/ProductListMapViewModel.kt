@@ -34,15 +34,17 @@ class ProductListMapViewModel() : ViewModel() {
     private fun initData() {
         Log.d()
 
-        ProductRepo.getListAsObservable().subscribe {
-            Log.d("ProductRepo.getListAsObservable().subscribe")
-            productList.set(it)
-        }
+        disposables.add(
+                ProductRepo.getListAsObservable().subscribe {
+                    Log.d("ProductRepo.getListAsObservable().subscribe")
+                    productList.set(it)
+                }
+        )
     }
 
     fun attachView(inflatedView: View, ctx: Context) {
         Log.d()
-        this.inflatedView = inflatedView.mapview
+        this.inflatedView = inflatedView
         initMapView(inflatedView.mapview)
         inflatedView.viewpager_productlist.adapter = ProductListPagerAdapter(ctx)
         inflatedView.viewpager_productlist.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -73,45 +75,47 @@ class ProductListMapViewModel() : ViewModel() {
         Log.d()
 
         mapView.focusCurrentLocationOnce()
-        productList.toObservable()
-                .map {
-                    it.map {
-                        it.location
-                    }.map {
-                        MapPoint.mapPointWithGeoCoord(it.latitude, it.longitude)
-                    }
-                }.subscribe {
-                    Log.d("drawMarker / productList.toObservable().subscribe it=$it")
-                    mapView.clear()
-                    mapView.drawMarkers(it)
-                }
+        disposables.add(
+                productList.toObservable()
+                        .map {
+                            it.map {
+                                it.location
+                            }.map {
+                                MapPoint.mapPointWithGeoCoord(it.latitude, it.longitude)
+                            }
+                        }.subscribe {
+                            Log.d("drawMarker / productList.toObservable().subscribe it=$it")
+                            mapView.clear()
+                            mapView.drawMarkers(it)
+                        }
+        )
 
-        mapView.getItemClickedObservable()
-                .subscribe(selectedItem::set)
+        disposables.add(
+                mapView.getItemClickedObservable()
+                        .subscribe(selectedItem::set)
+        )
 
         //region Focus selected location
         val selectedItemObservable = selectedItem.toObservable()
-        selectedItemObservable.subscribe {
-            Log.d("mapView.selectMarker($it)")
-        }
-
-        Observables.combineLatest(
-                productList.toObservable(),
-                selectedItemObservable)
-                .filter { (_, idx) ->
-                    idx >= 0
-                }.filter { (productList, _) ->
-                    productList.isNotEmpty()
-                }.doOnNext { (_, idx) ->
-                    mapView.selectMarker(idx)
-                }
-                .map { (productList, idx) ->
-                    productList[idx]
-                }.map {
-                    MapPoint.mapPointWithGeoCoord(it.location.latitude, it.location.longitude)
-                }.subscribe {
-                    mapView.setMapCenterPoint(it, true)
-                }
+        disposables.add(
+                Observables.combineLatest(
+                        productList.toObservable(),
+                        selectedItemObservable)
+                        .filter { (_, idx) ->
+                            idx >= 0
+                        }.filter { (productList, _) ->
+                            productList.isNotEmpty()
+                        }.doOnNext { (_, idx) ->
+                            mapView.selectMarker(idx)
+                        }
+                        .map { (productList, idx) ->
+                            productList[idx]
+                        }.map {
+                            MapPoint.mapPointWithGeoCoord(it.location.latitude, it.location.longitude)
+                        }.subscribe {
+                            mapView.setMapCenterPoint(it, true)
+                        }
+        )
         //endregion
     }
 

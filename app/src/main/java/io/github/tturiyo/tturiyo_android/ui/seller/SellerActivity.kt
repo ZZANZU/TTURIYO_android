@@ -7,7 +7,11 @@ import io.github.tturiyo.tturiyo_android.R
 import io.github.tturiyo.tturiyo_android.ui.seller.productlist.SellerProductListFragment
 
 
-class SellerActivity : BaseFragmentActivity() {
+class SellerActivity : BaseFragmentActivity(), SellerNavigator {
+    override fun backPressed() {
+        onBackPressed()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         contentFrameId = R.id.contentFrame
         initialFragmentClazz = SellerProductListFragment::class.java
