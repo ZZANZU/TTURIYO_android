@@ -10,11 +10,14 @@ import kotlinx.android.synthetic.main.item_product.view.*
  */
 class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(item: Product) {
-        itemView.customer_home_product_img.setImageResource(item.companyImage)
-        itemView.customer_home_product_company.text = item.companyName
-        itemView.customer_home_product_name.text = item.productName
-        itemView.customer_home_product_cost_before.text = item.productPriceBefore.toString()
-        itemView.customer_home_product_cost_after.text = item.productPriceAfter.toString()
-        itemView.customer_home_product_surplus.text = item.numberOfStock.toString()
+        bindWith(itemView, item)
     }
+}
+
+fun bindWith(view: View, item: Product) {
+    view.customer_home_product_company.text = item.companyName
+    view.customer_home_product_name.text = item.productName
+    view.customer_home_product_cost_before.text = item.productPriceBefore.toString()
+    view.customer_home_product_cost_after.text = item.productPriceAfter.toString()
+    view.customer_home_product_surplus.text = item.numberOfStock.toString()
 }

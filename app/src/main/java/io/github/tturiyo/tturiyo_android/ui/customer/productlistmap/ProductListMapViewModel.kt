@@ -3,6 +3,7 @@ package io.github.tturiyo.tturiyo_android.ui.customer.productlistmap
 import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.databinding.ObservableField
+import android.support.design.widget.TabLayout
 import android.view.View
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.viewmodel.toObservable
@@ -11,6 +12,7 @@ import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.managers.clear
 import io.github.tturiyo.tturiyo_android.managers.drawMarkers
 import io.github.tturiyo.tturiyo_android.managers.focusCurrentLocationOnce
+import io.github.tturiyo.tturiyo_android.ui.customer.productlistmap.pager.ProductListPagerAdapter
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_customer_productlistmap.view.*
 import net.daum.mf.map.api.MapPoint
@@ -41,6 +43,7 @@ class ProductListMapViewModel() : ViewModel() {
         Log.d()
         this.inflatedView = inflatedView.mapview
         initMapView(inflatedView.mapview)
+        inflatedView.viewpager_productlist.adapter = ProductListPagerAdapter(ctx)
     }
 
     private fun initMapView(mapView: MapView) {

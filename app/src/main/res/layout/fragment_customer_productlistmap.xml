@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -7,14 +8,29 @@
             type="io.github.tturiyo.tturiyo_android.ui.customer.productlistmap.ProductListMapViewModel"/>
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <net.daum.mf.map.api.MapView
             android:id="@+id/mapview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
-    </LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_productlist"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            app:items="@{vm.productList}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
 </layout>
