@@ -29,20 +29,20 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
     }
 
     // TODO jyp 180605 remove
-    private fun putTemporalValues() {
-        Log.d()
-        companyName.set("양이컴퍼니")
-        companyContact.set("02-1234-1234")
-        productName.set("양사료")
-        productPriceBefore.set("2000")
-        productPriceAfter.set("1000")
-        numberOfStock.set("8")
-        productDue.set("2018.06.05. 18:00")
-    }
+//    private fun putTemporalValues() {
+//        Log.d()
+//        companyName.set("양이컴퍼니")
+//        companyContact.set("02-1234-1234")
+//        productName.set("양사료")
+//        productPriceBefore.set("2000")
+//        productPriceAfter.set("1000")
+//        numberOfStock.set("8")
+//        productDue.set("2018.06.05. 18:00")
+//    }
 
     fun attachView(inflatedView: View) {
         // TODO jyp 180605 remove
-        putTemporalValues()
+//        putTemporalValues()
 
         disposables.addAll(
                 RxTextView.afterTextChangeEvents(inflatedView.et_companyname)
