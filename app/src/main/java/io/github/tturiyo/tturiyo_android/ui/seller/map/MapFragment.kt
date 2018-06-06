@@ -17,7 +17,7 @@ import io.github.tturiyo.tturiyo_android.data.file.getUuid
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.managers.chkPermissions
 import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
-import io.github.tturiyo.tturiyo_android.ui.seller.products.SellerProductListFragment
+import io.github.tturiyo.tturiyo_android.ui.seller.productlist.SellerProductListFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_seller.*
