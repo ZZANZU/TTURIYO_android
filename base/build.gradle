@@ -42,6 +42,7 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
     implementation "android.arch.lifecycle:common-java8:$lifecycle_version"
     kapt "com.android.databinding:compiler:$gradle_version"
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 }
 
 repositories {

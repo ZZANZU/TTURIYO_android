@@ -12,6 +12,7 @@ import io.github.tturiyo.base.ui.BaseNavigator
 import io.github.tturiyo.base.viewmodel.ViewModelFactory
 import io.github.tturiyo.tturiyo_android.R
 import io.github.tturiyo.tturiyo_android.databinding.FragmentSellerNewproductBinding
+import io.github.tturiyo.tturiyo_android.ui.customer.productlist.CustomerProductListViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.github.tturiyo.tturiyo_android.ui.seller.map.MapFragment
 import kotlinx.android.synthetic.main.activity_seller.*
@@ -25,9 +26,13 @@ class NewProductFragment: Fragment(), NewProductNavigator {
         }
     }
 
-    val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
     private lateinit var inflatedView: View
-    private lateinit var vm: NewProductViewModel
+    private val viewModel: NewProductViewModel by lazy {
+        ViewModelProviders
+                .of(this, ViewModelFactory(this))
+                .get(NewProductViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d()
@@ -37,13 +42,8 @@ class NewProductFragment: Fragment(), NewProductNavigator {
                 container, false)
 
         inflatedView = binding.root
-
-        vm = ViewModelProviders
-                .of(this, ViewModelFactory(
-                        this
-                ))
-                .get(NewProductViewModel::class.java)
-        binding.vm = vm
+        binding.vm = viewModel
+        viewModel.attachView(inflatedView)
 
         initView()
 
@@ -52,7 +52,6 @@ class NewProductFragment: Fragment(), NewProductNavigator {
 
     private fun initView() {
         Log.d()
-        vm.attachView(inflatedView)
 
         activity!!.seller_toolbar_tv.setText("추가하기")
     }

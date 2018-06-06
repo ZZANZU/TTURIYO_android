@@ -40,12 +40,10 @@ class CustomerHomeFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             when(position) {
                 0 -> {
-                    CustomerProductListFragment.newInstance(0)
-                    return CustomerProductListFragment()
+                    return CustomerProductListFragment.newInstance()
                 }
                 1 -> {
-                    ProductListMapFragment.newInstance()
-                    return ProductListMapFragment()
+                    return ProductListMapFragment.newInstance()
                 }
             }
             return CustomerProductListFragment()
