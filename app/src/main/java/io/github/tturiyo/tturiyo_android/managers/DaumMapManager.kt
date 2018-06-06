@@ -16,17 +16,25 @@ fun MapView.clear() {
 
 fun MapView.drawMarkers(mapPoints: List<MapPoint>) {
     Log.d()
-    mapPoints.forEach {
+    mapPoints.forEachIndexed { index, mapPoint ->
         val marker = MapPOIItem()
         marker.itemName = ""
-        marker.tag = 0
-        marker.mapPoint = it
+        marker.tag = index
+        marker.mapPoint = mapPoint
         marker.markerType = MapPOIItem.MarkerType.BluePin
         marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
         marker.isShowDisclosureButtonOnCalloutBalloon = false
         marker.isShowCalloutBalloonOnTouch = false
 
         this.addPOIItem(marker)
+    }
+}
+
+fun MapView.selectMarker(idx: Int) {
+    Log.d("idx=$idx")
+    val marker = this.findPOIItemByTag(idx)
+    if (marker != null) {
+        this.selectPOIItem(marker, true)
     }
 }
 
