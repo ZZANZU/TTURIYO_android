@@ -15,6 +15,9 @@ fun <T> ObservableField<T>.toObservable(): Observable<T> {
         this@toObservable.addOnPropertyChangedCallback(callback)
 
         // initial value
-        asyncEmitter.onNext(this@toObservable.get())
+        val initialValue = this@toObservable.get()
+        if (initialValue != null) {
+            asyncEmitter.onNext(initialValue)
+        }
     }
 }

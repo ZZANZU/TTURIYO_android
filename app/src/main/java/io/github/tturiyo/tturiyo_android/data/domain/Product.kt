@@ -16,6 +16,7 @@ import java.util.*
  * 10. location - 가게 위치(위도, 경도)
  */
 data class Product (
+        var id: String = "",
         var uid: String = "",
         var companyImage: Int = 0,
         var companyName: String = "",
@@ -23,6 +24,7 @@ data class Product (
         var productName: String = "",
         var productPriceBefore: Int = 0,
         var productPriceAfter: Int = 0,
+        var currentStock: Int = 0,
         var numberOfStock: Int = 0,
         var productDue: Long = Date().time,
         var location: Location = Location()

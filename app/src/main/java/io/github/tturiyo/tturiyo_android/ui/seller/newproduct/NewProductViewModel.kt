@@ -12,6 +12,9 @@ import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_seller_newproduct.view.*
 import java.util.*
+import android.app.TimePickerDialog
+import android.content.Context
+import io.reactivex.rxkotlin.Observables
 
 
 class NewProductViewModel(private var navigator: NewProductNavigator) : ViewModel() {
@@ -20,15 +23,15 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
     val companyName = ObservableField<String>("")
     val companyContact = ObservableField<String>("")
     val productName = ObservableField<String>("")
-    val productPriceBefore = ObservableField<String>("0")
-    val productPriceAfter = ObservableField<String>("0")
-    val numberOfStock = ObservableField<String>("0")
-    val productDue = ObservableField<String>(Date().toString())
+    val productPriceBefore = ObservableField<Int>()
+    val productPriceAfter = ObservableField<Int>()
+    val numberOfStock = ObservableField<Int>()
+    val productDue = ObservableField<Long>()
 
     init {
     }
 
-    // TODO jyp 180605 remove
+
 //    private fun putTemporalValues() {
 //        Log.d()
 //        companyName.set("양이컴퍼니")
@@ -37,15 +40,14 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
 //        productPriceBefore.set("2000")
 //        productPriceAfter.set("1000")
 //        numberOfStock.set("8")
-//        productDue.set("2018.06.05. 18:00")
+//        productDue.set(Calendar.getInstance().timeInMillis)
 //    }
 
-    fun attachView(inflatedView: View) {
-        // TODO jyp 180605 remove
+    fun attachView(inflatedView: View, ctx: Context) {
 //        putTemporalValues()
 
         disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_companyname)
+                RxTextView.afterTextChangeEvents(inflatedView.et_companyName)
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .logd()
@@ -58,7 +60,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
         )
 
         disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_companycontact)
+                RxTextView.afterTextChangeEvents(inflatedView.et_companyContact)
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .subscribe {
@@ -70,7 +72,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
         )
 
         disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_productname)
+                RxTextView.afterTextChangeEvents(inflatedView.et_productName)
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .subscribe {
@@ -86,6 +88,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             productPriceBefore.set(it)
                         },
@@ -99,6 +102,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             productPriceAfter.set(it)
                         },
@@ -112,6 +116,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             numberOfStock.set(it)
                         },
@@ -125,6 +130,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             numberOfStock.set(it)
                         },
@@ -133,21 +139,19 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                 }
         )
 
-        disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_productdue)
-                        .skipInitialValue()
-                        .map { it.editable().toString() }
-                        .map { Date() }
-                        .map { it.toString() }
+        disposables.add(
+                RxView.clicks(inflatedView.et_productdue)
                         .subscribe {
-                            productDue.set(it)
-                        },
-                productDue.toObservable().subscribe {
-                    // TODO jyp 180605 시간고르는창 띄우기
-//                    ProductData.data.productDue = SimpleDateFormat().parse(it)
-                }
+                            TimePickerDialog(ctx,
+                                    TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                                        val calendar = Calendar.getInstance()
+                                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                                        calendar.set(Calendar.MINUTE, minute)
+                                        productDue.set(calendar.timeInMillis)
+                                    }, 0,
+                                    0, false).show()
+                        }
         )
-
 
         disposables.add(
                 RxView.clicks(inflatedView.btn_next)
@@ -155,6 +159,34 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                             navigator.gotoMapFragment()
                         }
         )
+
+        Observables.combineLatest(
+                companyName.toObservable().map {
+                    it.isNotEmpty()
+                },
+                companyContact.toObservable().map {
+                    it.isNotEmpty()
+                },
+                productName.toObservable().map {
+                    it.isNotEmpty()
+                },
+                productPriceBefore.toObservable().map {
+                    it >= 0
+                },
+                productPriceAfter.toObservable().map {
+                    it >= 0
+                },
+                numberOfStock.toObservable().map {
+                    it >= 0
+                },
+                productDue.toObservable().map {
+                    it != 0L
+                }, { item1, item2, item3, item4,
+                     item5, item6, item7 ->
+            item1 && item2 && item3 && item4 &&
+                    item5 && item6 && item7
+        }).subscribe(inflatedView.btn_next::setEnabled)
+
     }
 
     override fun onCleared() {

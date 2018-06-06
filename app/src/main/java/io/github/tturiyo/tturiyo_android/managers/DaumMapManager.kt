@@ -3,7 +3,9 @@ package io.github.tturiyo.tturiyo_android.managers
 import android.Manifest
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.debug.assertDebug
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.SingleSubject
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -16,17 +18,110 @@ fun MapView.clear() {
 
 fun MapView.drawMarkers(mapPoints: List<MapPoint>) {
     Log.d()
-    mapPoints.forEach {
+    mapPoints.forEachIndexed { index, mapPoint ->
         val marker = MapPOIItem()
         marker.itemName = ""
-        marker.tag = 0
-        marker.mapPoint = it
+        marker.tag = index
+        marker.mapPoint = mapPoint
         marker.markerType = MapPOIItem.MarkerType.BluePin
         marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
         marker.isShowDisclosureButtonOnCalloutBalloon = false
         marker.isShowCalloutBalloonOnTouch = false
 
         this.addPOIItem(marker)
+    }
+}
+
+fun MapView.getItemClickedObservable(): BehaviorSubject<Int> {
+    val notifier = BehaviorSubject.create<Int>()
+    Log.d()
+
+    poiItemEventListener.notifier = notifier
+    this.setPOIItemEventListener(poiItemEventListener)
+
+    return notifier
+}
+
+object poiItemEventListener: MapView.POIItemEventListener {
+    var notifier: BehaviorSubject<Int>? = null
+
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
+        Log.d()
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?, p2: MapPOIItem.CalloutBalloonButtonType?) {
+        Log.d()
+    }
+
+    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem) {
+        Log.d("poiitem=$p1")
+        notifier?.let {
+            it.onNext(p1.tag)
+        }
+    }
+}
+
+object eventListener: MapView.MapViewEventListener {
+    var notifier: BehaviorSubject<MapPoint>? = null
+
+    override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint) {
+        Log.d()
+        notifier?.onNext(p1)
+    }
+
+    override fun onMapViewInitialized(p0: MapView?) {
+        Log.d()
+    }
+
+    override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewMoveFinished(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewCenterPointMoved(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewDragEnded(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onMapViewSingleTapped(p0: MapView?, p1: MapPoint) {
+        Log.d()
+        notifier?.onNext(p1)
+    }
+
+    override fun onMapViewZoomLevelChanged(p0: MapView?, p1: Int) {
+        Log.d()
+    }
+
+    override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {
+        Log.d()
+    }
+}
+
+fun MapView.getMapClickedObservable(): BehaviorSubject<MapPoint> {
+    val notifier = BehaviorSubject.create<MapPoint>()
+    Log.d()
+
+    eventListener.notifier = notifier
+    this.setMapViewEventListener(eventListener)
+
+    return notifier
+}
+
+fun MapView.selectMarker(idx: Int) {
+    Log.d("idx=$idx")
+    val marker = this.findPOIItemByTag(idx)
+    if (marker != null) {
+        this.selectPOIItem(marker, true)
     }
 }
 

@@ -1,6 +1,8 @@
 package io.github.tturiyo.tturiyo_android.data.repo
 
 import com.google.firebase.database.*
+import io.github.tturiyo.base.debug.Log
+import io.github.tturiyo.base.debug.assertDebug
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
@@ -13,14 +15,47 @@ object ProductRepo {
     private val usersRef = FirebaseDatabase.getInstance().getReference(USERS)
 
     fun insert(item: Product, onSuccess: () -> Unit = {}) {
+        Log.d()
+
         val productPush: DatabaseReference = productsRef.push()
-        productsRef.child(productPush.key).setValue(item).addOnSuccessListener {
+        item.id = productPush.key
+        productsRef.child(item.id).setValue(item).addOnSuccessListener {
             val currUserProductsRef = usersRef.child(item.uid).child(PRODUCTS)
             val relationPush = currUserProductsRef.push()
             currUserProductsRef.child(relationPush.key).setValue(productPush.key).addOnSuccessListener {
                 onSuccess()
             }
         }
+    }
+
+    fun update(item: Product, onSuccess: () -> Unit = {}) {
+        Log.d()
+
+        productsRef.child(item.id).setValue(item).addOnSuccessListener {
+            onSuccess()
+        }
+    }
+
+    fun delete(item: Product, onSuccess: () -> Unit = {}) {
+        val userProductsRef = usersRef.child(item.uid).child(PRODUCTS)
+        userProductsRef.orderByValue().equalTo(item.id).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                Log.d()
+
+                assertDebug(p0.childrenCount > 0)
+
+                val userProductItem = p0.children.iterator().next()
+                userProductsRef.child(userProductItem.key).removeValue().addOnSuccessListener {
+                    productsRef.child(item.id).removeValue().addOnSuccessListener {
+                        onSuccess()
+                    }
+                }
+            }
+        })
     }
 
     fun getListAsObservable(): Observable<List<Product>> {
