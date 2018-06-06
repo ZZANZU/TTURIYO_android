@@ -13,7 +13,7 @@ fun Context.hasUuidExists(): Boolean {
     return File(filesDir, UUIDFILENAME).exists()
 }
 
-fun Context.extSaveOnInternalStorage(data: String) {
+fun Context.saveOnInternalStorage(data: String) {
     val fos = openFileOutput(UUIDFILENAME, Context.MODE_PRIVATE)
     fos.write(data.toByteArray())
     fos.close()
