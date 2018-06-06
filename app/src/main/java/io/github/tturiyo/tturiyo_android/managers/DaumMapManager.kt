@@ -3,7 +3,9 @@ package io.github.tturiyo.tturiyo_android.managers
 import android.Manifest
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.base.debug.assertDebug
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.SingleSubject
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -27,6 +29,39 @@ fun MapView.drawMarkers(mapPoints: List<MapPoint>) {
         marker.isShowCalloutBalloonOnTouch = false
 
         this.addPOIItem(marker)
+    }
+}
+
+fun MapView.getItemClickedObservable(): BehaviorSubject<Int> {
+    val notifier = BehaviorSubject.create<Int>()
+    Log.d()
+
+    poiItemEventListener.notifier = notifier
+    this.setPOIItemEventListener(poiItemEventListener)
+
+    return notifier
+}
+
+object poiItemEventListener: MapView.POIItemEventListener {
+    var notifier: BehaviorSubject<Int>? = null
+
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
+        Log.d()
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?, p2: MapPOIItem.CalloutBalloonButtonType?) {
+        Log.d()
+    }
+
+    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
+        Log.d()
+    }
+
+    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem) {
+        Log.d("poiitem=$p1")
+        notifier?.let {
+            it.onNext(p1.tag)
+        }
     }
 }
 
