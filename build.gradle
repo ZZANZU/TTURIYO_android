@@ -4,8 +4,8 @@ buildscript {
     ext.kotlin_version = '1.2.41'
     ext.lifecycle_version = '1.1.1'
     ext.gradle_version = '3.1.2'
-    ext.version_code = 2
-    ext.version_name = '1.1'
+    ext.version_code = 3
+    ext.version_name = '1.2'
 
     repositories {
         google()
