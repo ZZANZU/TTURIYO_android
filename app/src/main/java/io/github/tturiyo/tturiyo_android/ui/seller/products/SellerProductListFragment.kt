@@ -16,11 +16,11 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_seller.*
 import kotlinx.android.synthetic.main.fragment_seller_productlist.view.*
 
-class ProductListFragment : Fragment() {
+class SellerProductListFragment : Fragment() {
     companion object {
-        fun newInstance(): ProductListFragment {
+        fun newInstance(): SellerProductListFragment {
             Log.d()
-            return ProductListFragment()
+            return SellerProductListFragment()
         }
     }
 

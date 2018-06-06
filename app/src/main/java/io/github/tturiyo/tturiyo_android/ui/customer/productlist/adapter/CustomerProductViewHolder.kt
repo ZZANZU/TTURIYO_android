@@ -1,4 +1,4 @@
-package io.github.tturiyo.tturiyo_android.ui.customer
+package io.github.tturiyo.tturiyo_android.ui.customer.productlist.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_customer_home_list.view.*
 /**
  * Created by user on 2018-05-22.
  */
-class CustomerHomeProductViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+class CustomerProductViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     fun bind(item: Product) {
         itemView.customer_home_product_img.setImageResource(item.companyImage)
         itemView.customer_home_product_company.text = item.companyName

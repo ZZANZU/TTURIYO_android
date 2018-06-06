@@ -1,4 +1,4 @@
-package io.github.tturiyo.tturiyo_android.ui.customer
+package io.github.tturiyo.tturiyo_android.ui.customer.productlistmap
 
 import android.Manifest
 import android.os.Bundle
@@ -18,10 +18,10 @@ import net.daum.mf.map.api.MapView
 /**
  * Created by user on 2018-05-22.
  */
-class CustomerHomeSearchFragment: Fragment() {
+class ProductListMapFragment: Fragment() {
     companion object {
-        fun newInstance(): CustomerHomeSearchFragment {
-            return CustomerHomeSearchFragment()
+        fun newInstance(): ProductListMapFragment {
+            return ProductListMapFragment()
         }
     }
 

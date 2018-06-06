@@ -17,7 +17,7 @@ import io.github.tturiyo.tturiyo_android.data.file.getUuid
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
 import io.github.tturiyo.tturiyo_android.managers.chkPermissions
 import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
-import io.github.tturiyo.tturiyo_android.ui.seller.products.ProductListFragment
+import io.github.tturiyo.tturiyo_android.ui.seller.products.SellerProductListFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_seller.*
@@ -67,7 +67,7 @@ class MapFragment : Fragment(), MapView.MapViewEventListener, MapView.CurrentLoc
                             val item = ProductData.getAndClear()
                             item.uid = GlobalApplication.context.get()!!.getUuid()
                             ProductRepo.insert(item = item,
-                                    onSuccess = { BaseNavigator.gotoFragmentWithClearingBackstack(this, ProductListFragment::class.java) })
+                                    onSuccess = { BaseNavigator.gotoFragmentWithClearingBackstack(this, SellerProductListFragment::class.java) })
                         }
         )
 

@@ -1,4 +1,4 @@
-package io.github.tturiyo.tturiyo_android.ui.customer
+package io.github.tturiyo.tturiyo_android.ui.customer.productlist
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,30 +9,27 @@ import android.view.ViewGroup
 import io.github.tturiyo.tturiyo_android.R
 import io.github.tturiyo.tturiyo_android.data.domain.Product
 import kotlinx.android.synthetic.main.fragment_customer_home_list.view.*
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import io.github.tturiyo.base.debug.Log
 import io.github.tturiyo.tturiyo_android.data.repo.ProductRepo
+import io.github.tturiyo.tturiyo_android.ui.customer.productlist.adapter.CustomerProductAdapter
 import io.reactivex.subjects.BehaviorSubject
 
 
 /**
  * Created by user on 2018-05-22.
  */
-class CustomerHomeListFragment: Fragment() {
+class CustomerProductListFragment: Fragment() {
     val mProductItems :BehaviorSubject<List<Product>> = BehaviorSubject.createDefault(emptyList())
-    lateinit var mCustomerHomeProductAdapter : CustomerHomeProductAdapter
+    lateinit var mCustomerProductAdapter : CustomerProductAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val mView = inflater.inflate(R.layout.fragment_customer_home_list, container, false)
 
         initData()
-        mCustomerHomeProductAdapter = CustomerHomeProductAdapter(mProductItems)
+        mCustomerProductAdapter = CustomerProductAdapter(mProductItems)
 
         mView.customer_home_list_rv.layoutManager = LinearLayoutManager(activity)
-        mView.customer_home_list_rv.adapter = mCustomerHomeProductAdapter
+        mView.customer_home_list_rv.adapter = mCustomerProductAdapter
 
         return mView
     }
@@ -49,8 +46,8 @@ class CustomerHomeListFragment: Fragment() {
     companion object {
         private val ARG_SECTION_NUMBER = "section_number"
 
-        fun newInstance(sectionNumber: Int): CustomerHomeListFragment {
-            val fragment = CustomerHomeListFragment()
+        fun newInstance(sectionNumber: Int): CustomerProductListFragment {
+            val fragment = CustomerProductListFragment()
             val args = Bundle()
             args.putInt(ARG_SECTION_NUMBER, sectionNumber)
             fragment.arguments = args
