@@ -43,7 +43,7 @@ class NewProductFragment: Fragment(), NewProductNavigator {
 
         inflatedView = binding.root
         binding.vm = viewModel
-        viewModel.attachView(inflatedView)
+        viewModel.attachView(inflatedView, context!!)
 
         initView()
 

@@ -12,6 +12,8 @@ import io.github.tturiyo.tturiyo_android.ui.seller.ProductData
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_seller_newproduct.view.*
 import java.util.*
+import android.app.TimePickerDialog
+import android.content.Context
 
 
 class NewProductViewModel(private var navigator: NewProductNavigator) : ViewModel() {
@@ -23,7 +25,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
     val productPriceBefore = ObservableField<String>("0")
     val productPriceAfter = ObservableField<String>("0")
     val numberOfStock = ObservableField<String>("0")
-    val productDue = ObservableField<String>(Date().toString())
+    val productDue = ObservableField<Long>(0)
 
     init {
     }
@@ -37,10 +39,10 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
         productPriceBefore.set("2000")
         productPriceAfter.set("1000")
         numberOfStock.set("8")
-        productDue.set("2018.06.05. 18:00")
+        productDue.set(Calendar.getInstance().timeInMillis)
     }
 
-    fun attachView(inflatedView: View) {
+    fun attachView(inflatedView: View, ctx: Context) {
         // TODO jyp 180605 remove
         putTemporalValues()
 
@@ -133,21 +135,19 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                 }
         )
 
-        disposables.addAll(
-                RxTextView.afterTextChangeEvents(inflatedView.et_productdue)
-                        .skipInitialValue()
-                        .map { it.editable().toString() }
-                        .map { Date() }
-                        .map { it.toString() }
+        disposables.add(
+                RxView.clicks(inflatedView.et_productdue)
                         .subscribe {
-                            productDue.set(it)
-                        },
-                productDue.toObservable().subscribe {
-                    // TODO jyp 180605 시간고르는창 띄우기
-//                    ProductData.data.productDue = SimpleDateFormat().parse(it)
-                }
+                            TimePickerDialog(ctx,
+                                    TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                                        val calendar = Calendar.getInstance()
+                                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                                        calendar.set(Calendar.MINUTE, minute)
+                                        productDue.set(calendar.timeInMillis)
+                                    }, 0,
+                                    0, false).show()
+                        }
         )
-
 
         disposables.add(
                 RxView.clicks(inflatedView.btn_next)
