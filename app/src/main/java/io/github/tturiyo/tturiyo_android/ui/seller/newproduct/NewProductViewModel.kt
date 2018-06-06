@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_seller_newproduct.view.*
 import java.util.*
 import android.app.TimePickerDialog
 import android.content.Context
+import io.reactivex.rxkotlin.Observables
 
 
 class NewProductViewModel(private var navigator: NewProductNavigator) : ViewModel() {
@@ -22,29 +23,27 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
     val companyName = ObservableField<String>("")
     val companyContact = ObservableField<String>("")
     val productName = ObservableField<String>("")
-    val productPriceBefore = ObservableField<String>("0")
-    val productPriceAfter = ObservableField<String>("0")
-    val numberOfStock = ObservableField<String>("0")
-    val productDue = ObservableField<Long>(0)
+    val productPriceBefore = ObservableField<Int>()
+    val productPriceAfter = ObservableField<Int>()
+    val numberOfStock = ObservableField<Int>()
+    val productDue = ObservableField<Long>()
 
     init {
     }
 
-    // TODO jyp 180605 remove
-    private fun putTemporalValues() {
-        Log.d()
-        companyName.set("양이컴퍼니")
-        companyContact.set("02-1234-1234")
-        productName.set("양사료")
-        productPriceBefore.set("2000")
-        productPriceAfter.set("1000")
-        numberOfStock.set("8")
-        productDue.set(Calendar.getInstance().timeInMillis)
-    }
+//    private fun putTemporalValues() {
+//        Log.d()
+//        companyName.set("양이컴퍼니")
+//        companyContact.set("02-1234-1234")
+//        productName.set("양사료")
+//        productPriceBefore.set("2000")
+//        productPriceAfter.set("1000")
+//        numberOfStock.set("8")
+//        productDue.set(Calendar.getInstance().timeInMillis)
+//    }
 
     fun attachView(inflatedView: View, ctx: Context) {
-        // TODO jyp 180605 remove
-        putTemporalValues()
+//        putTemporalValues()
 
         disposables.addAll(
                 RxTextView.afterTextChangeEvents(inflatedView.et_companyName)
@@ -88,6 +87,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             productPriceBefore.set(it)
                         },
@@ -101,6 +101,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             productPriceAfter.set(it)
                         },
@@ -114,6 +115,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             numberOfStock.set(it)
                         },
@@ -127,6 +129,7 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                         .skipInitialValue()
                         .map { it.editable().toString() }
                         .filter { it.toIntOrNull() != null }
+                        .map { it.toInt() }
                         .subscribe {
                             numberOfStock.set(it)
                         },
@@ -155,6 +158,34 @@ class NewProductViewModel(private var navigator: NewProductNavigator) : ViewMode
                             navigator.gotoMapFragment()
                         }
         )
+
+        Observables.combineLatest(
+                companyName.toObservable().map {
+                    it.isNotEmpty()
+                },
+                companyContact.toObservable().map {
+                    it.isNotEmpty()
+                },
+                productName.toObservable().map {
+                    it.isNotEmpty()
+                },
+                productPriceBefore.toObservable().map {
+                    it >= 0
+                },
+                productPriceAfter.toObservable().map {
+                    it >= 0
+                },
+                numberOfStock.toObservable().map {
+                    it >= 0
+                },
+                productDue.toObservable().map {
+                    it != 0L
+                }, { item1, item2, item3, item4,
+                     item5, item6, item7 ->
+            item1 && item2 && item3 && item4 &&
+                    item5 && item6 && item7
+        }).subscribe(inflatedView.btn_next::setEnabled)
+
     }
 
     override fun onCleared() {

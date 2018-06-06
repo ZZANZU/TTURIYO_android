@@ -14,3 +14,10 @@ fun setValue(editText: EditText, value: Long) {
 
     editText.setText(value.toDateTimeFormat("yyyy-MM-dd HH:mm"))
 }
+
+@BindingAdapter("android:text")
+fun setValue(editText: EditText, value: Int) {
+    Log.d()
+
+    editText.setText(value.toString())
+}
